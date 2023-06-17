@@ -12,6 +12,32 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        jostBodyBold: ["var(--font-jostBold)", "sans-serif"],
+        jostBodyRegular: ["var(--font-jostRegular)", "sans-serif"],
+      },
+      fontSize: {
+        16: "16px",
+        14: "14px",
+      },
+      fontWeight: {
+        400: 400,
+        700: 700,
+      },
+      lineHeight: {
+        23: "23px",
+      },
+      dropShadow: {
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+      },
+      borderRadius: {
+        10: "10px",
+      },
+      spacing: {
+        "30px": "1.875rem",
+        "13.5px": "0.8437rem",
+      },
+
       colors: {
         primary: {
           100: "#A29FA9",
