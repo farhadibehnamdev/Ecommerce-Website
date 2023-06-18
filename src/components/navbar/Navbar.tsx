@@ -1,13 +1,74 @@
 "use client";
 import Image from "next/image";
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { Disclosure, Menu, Popover, Transition } from "@headlessui/react";
+import {
+  ArrowPathIcon,
+  ChartPieIcon,
+  ChevronDownIcon,
+  CursorArrowRaysIcon,
+  DocumentChartBarIcon,
+  FingerPrintIcon,
+  SquaresPlusIcon,
+} from "@heroicons/react/20/solid";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Fragment } from "react";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
+
+const solutions = [
+  {
+    id: 1,
+    title: "Men",
+    data: [
+      {
+        name: "Analytics",
+        description: "Get a better understanding of your traffic",
+        href: "#",
+        icon: ChartPieIcon,
+      },
+      {
+        name: "Integrations",
+        description: "Connect with third-party tools and find out expectations",
+        href: "#",
+        icon: SquaresPlusIcon,
+      },
+      {
+        name: "Engagement",
+        description:
+          "Speak directly to your customers with our engagement tool",
+        href: "#",
+        icon: CursorArrowRaysIcon,
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Women",
+    data: [
+      {
+        name: "Automations",
+        description: "Build strategic funnels that will convert",
+        href: "#",
+        icon: ArrowPathIcon,
+      },
+      {
+        name: "Security",
+        description: "Your customers' data will be safe and secure",
+        href: "#",
+        icon: FingerPrintIcon,
+      },
+      {
+        name: "Reports",
+        description: "Edit, manage and create newly informed decisions",
+        href: "#",
+        icon: DocumentChartBarIcon,
+      },
+    ],
+  },
+];
+
 const Navbar = function () {
   return (
     <Disclosure as="nav" className="bg-white shadow lg:pt-4 lg:pb-4">
@@ -18,68 +79,149 @@ const Navbar = function () {
               <div className="flex px-2 lg:px-0">
                 <div className="flex flex-shrink-0 items-center">
                   <Image
-                    width={38}
-                    height={32}
-                    className="block h-8 w-auto lg:hidden"
+                    width={144}
+                    height={58}
+                    className="hidden h-10 w-auto lg:block"
                     src="/images/logo.png"
                     alt="Your Company"
                   />
-                  <Image
-                    width={38}
-                    height={32}
-                    className="hidden h-8 w-auto lg:block"
-                    src="/images/logo.png"
-                    alt="Your Company"
-                  />
-                </div>
-                <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
-                  {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
-                  >
-                    Dashboard
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Team
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Projects
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Calendar
-                  </a>
                 </div>
               </div>
-              <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
-                <div className="w-full max-w-lg lg:max-w-xs">
-                  <label htmlFor="search" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <MagnifyingGlassIcon
-                        className="h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <input
-                      id="search"
-                      name="search"
-                      className="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      placeholder="Search"
-                      type="search"
+              <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
+                <a
+                  href="#"
+                  className="inline-flex font-jostBodyRegular text-16 font-normal leading-23 items-center border-b-2  px-1 pt-1 text-dark"
+                >
+                  Home
+                </a>
+                <Popover className="relative flex">
+                  <Popover.Button className="inline-flex items-center gap-x-1 text-16 font-jostBodyRegular leading-23 focus:outline-none">
+                    <span className="text-dark">Shop</span>
+                    <ChevronDownIcon
+                      className="h-5 w-5 text-dark"
+                      aria-hidden="true"
                     />
+                  </Popover.Button>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1"
+                  >
+                    <Popover.Panel className="absolute left-1/2 z-10 mt-16 flex w-screen max-w-max -translate-x-1/3 px-4">
+                      <div className="w-screen max-w-md  flex-auto overflow-hidden  bg-white text-16 leading-23 shadow-lg ring-1 ring-zinc-200 lg:max-w">
+                        <div className="grid grid-cols-2  divide-x divide-grayOpacity  pt-10 pb-10 lg:grid-cols-2">
+                          {solutions.map((items, index) => (
+                            <div
+                              key={items.id}
+                              className="grid gap-y-3 pl-10 pr-0"
+                            >
+                              <p className="text-dark font-jostBodyBold font-700 mb-5">
+                                {items.title}
+                              </p>
+                              {items.data.map((item, index) => {
+                                return (
+                                  <a
+                                    key={item.name}
+                                    className={`inline-block text-dark font-jostBodyRegular text-16 leading-23 ${
+                                      index < solutions.length ? "mb-4" : ""
+                                    }`}
+                                  >
+                                    {item.name}
+                                  </a>
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </Popover.Panel>
+                  </Transition>
+                </Popover>
+                <a
+                  href="#"
+                  className="inline-flex items-center font-jostBodyRegular text-16 font-normal leading-23 border-b-2 border-transparent px-1 pt-1  text-dark hover:border-gray-300 hover:text-gray-700"
+                >
+                  Our Story
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex font-jostBodyRegular text-16 font-normal leading-23 items-center border-b-2 border-transparent px-1 pt-1  text-dark hover:border-gray-300 hover:text-gray-700"
+                >
+                  Contact Us
+                </a>
+              </div>
+              <div className="hidden lg:ml-4 lg:flex lg:items-center gap-5">
+                <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
+                  <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
+                    <button className="rounded-full bg-white p-1 text-gray-400">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                      >
+                        <path
+                          fill="#131118"
+                          fillRule="evenodd"
+                          d="M2.75 11.5a8.75 8.75 0 1 0 17.5 0 8.75 8.75 0 0 0-17.5 0Zm8.75 10.25c-5.66 0-10.25-4.59-10.25-10.25S5.84 1.25 11.5 1.25 21.75 5.84 21.75 11.5c0 2.56-.939 4.902-2.491 6.698l3.271 3.272a.75.75 0 1 1-1.06 1.06l-3.272-3.271A10.21 10.21 0 0 1 11.5 21.75Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
                   </div>
+                  <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
+                    <button className="rounded-full bg-white p-1 text-gray-400">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="20"
+                        fill="none"
+                      >
+                        <path
+                          stroke="#131118"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M11.765 2.702 11 3.524l-.765-.822c-2.113-2.27-5.538-2.27-7.65 0-2.113 2.27-2.113 5.95 0 8.22l6.885 7.397a2.06 2.06 0 0 0 3.06 0l6.886-7.397c2.112-2.27 2.112-5.95 0-8.22-2.113-2.27-5.538-2.27-7.651 0Z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
+                    <button className="rounded-full bg-white p-1 text-gray-400">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="none"
+                      >
+                        <path
+                          stroke="#131118"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M9 6v1a3 3 0 1 0 6 0V6"
+                        />
+                        <path
+                          stroke="#131118"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M15.612 3H8.389a4 4 0 0 0-3.946 3.342l-1.667 10A4 4 0 0 0 6.722 21h10.556a4 4 0 0 0 3.946-4.658l-1.667-10A4 4 0 0 0 15.612 3Z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div className="flex-shrink-0">
+                  <button
+                    type="button"
+                    className="relative rounded-10 bg-dark py-13.5px px-30px"
+                  >
+                    Login
+                  </button>
                 </div>
               </div>
               <div className="flex items-center lg:hidden">
@@ -93,169 +235,8 @@ const Navbar = function () {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="hidden lg:ml-4 lg:flex lg:items-center">
-                <button
-                  type="button"
-                  className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-4 flex-shrink-0">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                      <span className="sr-only">Open user menu</span>
-                      <Image
-                        width={256}
-                        height={256}
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
             </div>
           </div>
-
-          <Disclosure.Panel className="lg:hidden">
-            <div className="space-y-1 pb-3 pt-2">
-              {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700"
-              >
-                Dashboard
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
-              >
-                Team
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
-              >
-                Projects
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
-              >
-                Calendar
-              </Disclosure.Button>
-            </div>
-            <div className="border-t border-gray-200 pb-3 pt-4">
-              <div className="flex items-center px-4">
-                <div className="flex-shrink-0">
-                  <Image
-                    width={256}
-                    height={256}
-                    className="h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">
-                    Tom Cook
-                  </div>
-                  <div className="text-sm font-medium text-gray-500">
-                    tom@example.com
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-              </div>
-              <div className="mt-3 space-y-1">
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                >
-                  Your Profile
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                >
-                  Settings
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                >
-                  Sign out
-                </Disclosure.Button>
-              </div>
-            </div>
-          </Disclosure.Panel>
         </>
       )}
     </Disclosure>
