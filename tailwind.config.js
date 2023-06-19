@@ -36,6 +36,15 @@ module.exports = {
       spacing: {
         "30px": "1.875rem",
         "13.5px": "0.8437rem",
+        "5px": "0.3125rem",
+        "122.5px": "7.65rem",
+        "16.5px": "1.03rem",
+      },
+      width: {
+        "70px": "70px",
+      },
+      height: {
+        "70px": "70px",
       },
 
       colors: {
