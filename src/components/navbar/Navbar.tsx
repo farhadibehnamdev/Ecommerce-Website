@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
+import { ShoppingCart } from "../presentational/ShoppingCart";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -94,6 +95,7 @@ const Navbar = function () {
                 >
                   Home
                 </a>
+
                 <Popover className="relative flex">
                   <Popover.Button className="inline-flex items-center gap-x-1 text-16 font-jostBodyRegular leading-23 focus:outline-none">
                     <span className="text-dark">Shop</span>
@@ -113,7 +115,7 @@ const Navbar = function () {
                   >
                     <Popover.Panel className="absolute left-1/2 z-10 mt-16 flex w-screen max-w-max -translate-x-1/3 px-4">
                       <div className="w-screen max-w-md  flex-auto overflow-hidden  bg-white text-16 leading-23 shadow-lg ring-1 ring-zinc-200 lg:max-w">
-                        <div className="grid grid-cols-2  divide-x divide-grayOpacity  pt-10 pb-10 lg:grid-cols-2">
+                        <div className="grid grid-cols-2  divide-x  divide-grayOpacity  pt-10 pb-10 lg:grid-cols-2">
                           {solutions.map((items, index) => (
                             <div
                               key={items.id}
@@ -154,6 +156,7 @@ const Navbar = function () {
                   Contact Us
                 </a>
               </div>
+
               <div className="hidden lg:ml-4 lg:flex lg:items-center gap-5">
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
                   <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
@@ -191,28 +194,7 @@ const Navbar = function () {
                     </button>
                   </div>
                   <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
-                    <button className="rounded-full bg-white p-1 text-gray-400">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="none"
-                      >
-                        <path
-                          stroke="#131118"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1.5"
-                          d="M9 6v1a3 3 0 1 0 6 0V6"
-                        />
-                        <path
-                          stroke="#131118"
-                          strokeLinejoin="round"
-                          strokeWidth="1.5"
-                          d="M15.612 3H8.389a4 4 0 0 0-3.946 3.342l-1.667 10A4 4 0 0 0 6.722 21h10.556a4 4 0 0 0 3.946-4.658l-1.667-10A4 4 0 0 0 15.612 3Z"
-                        />
-                      </svg>
-                    </button>
+                    <ShoppingCart />
                   </div>
                 </div>
                 <div className="flex-shrink-0">
