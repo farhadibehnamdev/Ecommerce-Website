@@ -27,7 +27,7 @@ const Login = function () {
 
           <div className="mt-10">
             <div>
-              <form action="#" method="POST" className="space-y-6">
+              <form action="#" method="POST" className="space-y-7">
                 <div>
                   <label
                     htmlFor="email"
