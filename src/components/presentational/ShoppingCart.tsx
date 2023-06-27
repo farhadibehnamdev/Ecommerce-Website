@@ -80,7 +80,7 @@ export const ShoppingCart = function () {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <Popover.Panel className="absolute top-16 bg-white  shadow-lg p-5  lg:left-auto lg:right-0 lg:top-full lg:-mr-2 lg:mt-3 lg:w-85  lg:ring-1 lg:ring-black lg:ring-opacity-5">
+        <Popover.Panel className="absolute top-16 bg-white z-50  shadow-lg p-5  lg:left-auto lg:right-0 lg:top-full lg:-mr-2 lg:mt-3 lg:w-85  lg:ring-1 lg:ring-black lg:ring-opacity-5">
           <form className="mx-auto max-w-2xl">
             <p className="text-dark font-jostBodyRegular font-400 leading-23 text-16 mb-7">
               You have 3 items in your cart
