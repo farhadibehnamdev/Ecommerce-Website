@@ -12,6 +12,9 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      maxWidth: {
+        90: "90rem",
+      },
       fontFamily: {
         jostBodyBold: ["var(--font-jostBold)", "sans-serif"],
         jostBodyRegular: ["var(--font-jostRegular)", "sans-serif"],
@@ -19,6 +22,7 @@ module.exports = {
       fontSize: {
         16: "16px",
         14: "14px",
+        241: "241.38px",
       },
       fontWeight: {
         400: 400,
@@ -42,6 +46,7 @@ module.exports = {
       },
       width: {
         "70px": "70px",
+        8625: "86.25rem",
       },
       height: {
         "70px": "70px",
@@ -82,6 +87,7 @@ module.exports = {
           900: "#6C0772",
         },
         dark: "#131118",
+        dark5: "#1311180D",
         gray: "#A4A1AA",
         grayOpacity: "#A4A1AA33",
         light: "#D9E1E1",
