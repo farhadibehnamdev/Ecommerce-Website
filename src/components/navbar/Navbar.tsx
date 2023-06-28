@@ -72,7 +72,10 @@ const solutions = [
 
 const Navbar = function () {
   return (
-    <Disclosure as="nav" className="bg-white shadow lg:pt-4 lg:pb-4">
+    <Disclosure
+      as="nav"
+      className="bg-white mx-auto max-w-full md:max-w-[1440px] lg:pt-4 lg:pb-4"
+    >
       {({ open }) => (
         <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
           <div className="flex h-16 justify-between">
