@@ -20,6 +20,7 @@ module.exports = {
       },
       maxWidth: {
         90: "90rem",
+        "1380px": "86.25rem",
       },
       fontFamily: {
         jostBodyBold: ["var(--font-jostBold)", "sans-serif"],
