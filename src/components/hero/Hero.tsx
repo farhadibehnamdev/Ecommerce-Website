@@ -5,9 +5,9 @@ import { ArrowRight } from "react-huge-icons/outline";
 
 const Hero = function () {
   return (
-    <div className="relative bg-dark5 w-8625">
+    <div className="relative bg-dark5  xl:max-w-[1380px]  lg:w-full">
       <div className=" lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
-        <div className="ml-32 pb-24 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-56 lg:pt-48 xl:col-span-6">
+        <div className="ml-0 pb-24 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-56 lg:pt-48 xl:col-span-6">
           <div className="relative mx-auto   max-w-2xl lg:mx-0">
             <p className="mt-6 text-dark font-400 font-jostBodyRegular break-words text-3xl">
               Classic Exclusive
