@@ -95,6 +95,8 @@ module.exports = {
         },
         dark: "#131118",
         dark5: "#1311180D",
+        dark600: "#14111C",
+        dark90: "#131118E8",
         gray: "#A4A1AA",
         grayOpacity: "#A4A1AA33",
         light: "#D9E1E1",
