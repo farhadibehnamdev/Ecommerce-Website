@@ -4,7 +4,9 @@ import { ArrowLeft, ArrowRight } from "react-huge-icons/outline";
 const ShopByCategories = function () {
   return (
     <>
-      <div className="xl:w-[1140px] mt-24 mb-36">
+      {/* xl:w-[1140px] mt-24 mb-36 */}
+
+      <div className="mx-auto max-w-2xl sm:px-6 lg:max-w-7xl lg:xl:w-[1140px] mt-24 mb-36 lg:px-0 xl:px-0">
         <div className="flex justify-between items-center mb-12">
           <h3 className="text-dark xl:text-[40px] sm:text-[20px] flex justify-center items-center  xl:font-jostBodyBold">
             Shop By Categories
@@ -42,7 +44,7 @@ const ShopByCategories = function () {
               src="/images/casual.png"
               alt="casual"
             />
-            <button className="bg-white rounded-10 absolute bottom-0  mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
+            <button className="bg-white rounded-10 absolute bottom-0 transition ease-in delay-50  mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
               Casual Wear
             </button>
           </div>
@@ -59,7 +61,7 @@ const ShopByCategories = function () {
               alt="western"
               className="mt-[13px] ml-[27px]"
             />
-            <button className="bg-white rounded-10 absolute bottom-0  mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
+            <button className="bg-white rounded-10 transition ease-in delay-50 absolute bottom-0  mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
               Western Wear
             </button>
           </div>
@@ -76,7 +78,7 @@ const ShopByCategories = function () {
               className="mt-[13px] ml-[47px]"
               alt="ethnic"
             />
-            <button className="bg-white rounded-10 absolute bottom-0 mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
+            <button className="bg-white rounded-10 transition ease-in delay-50 absolute bottom-0 mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
               Ethnic Wear
             </button>
           </div>
@@ -93,7 +95,7 @@ const ShopByCategories = function () {
               className="mt-[13px] ml-[47px]"
               alt="kids"
             />
-            <button className="bg-white rounded-10 absolute bottom-0  mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
+            <button className="bg-white rounded-10 transition ease-in delay-50 absolute bottom-0  mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 drop-shadow-boxShadow hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
               Kids Wear
             </button>
           </div>
