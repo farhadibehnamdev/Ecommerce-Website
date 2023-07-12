@@ -1,5 +1,12 @@
+"use client";
+import { useRef, useState } from "react";
+import { ArrowsRightLeftIcon } from "@heroicons/react/20/solid";
+import { HeartIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-
+import { Eye } from "react-huge-icons/outline";
+type ShowStateType = {
+  [key: string]: boolean;
+};
 const products = [
   {
     id: 1,
@@ -94,6 +101,11 @@ const products = [
   // More products...
 ];
 const OurBestseller = function () {
+  const [isShow, setIsShow] = useState<ShowStateType>({});
+  const toggleHandler = function (id: number, show: boolean) {
+    console.log("isShow :", isShow);
+    setIsShow((prevState: any) => ({ ...prevState, [id]: show }));
+  };
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl sm:px-6 sm:py-24 lg:max-w-7xl lg:xl:w-[1140px]  mb-36 xl:pt-0 xl:px-0">
@@ -105,8 +117,37 @@ const OurBestseller = function () {
 
         <div className="mt-6 grid text-dark md:grid-cols-3 gap-x-4 gap-y-10 sm:grid-cols-2 sm:gap-x-6 xl:grid-cols-4 lg:grid-cols-4 md:gap-y-0 lg:gap-x-8 lg:gap-[30px]">
           {products.map((product) => (
-            <div key={product.id} className="group relative md:my-5">
-              <div className="h-56 w-full flex item-center justify-center overflow-hidden  bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80 relative">
+            <div
+              onMouseEnter={() => toggleHandler(product.id, true)}
+              onMouseLeave={() => toggleHandler(product.id, false)}
+              key={product.id}
+              className="group relative md:my-5"
+            >
+              <div className="h-[330px] w-full flex item-center  justify-center overflow-hidden  bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80 relative">
+                <div
+                  className={`absolute flex  ${
+                    isShow[product.id] ? "visible" : "invisible"
+                  } flex-col p-5 gap-2 right-0 items-baseline justify-start`}
+                >
+                  <button className="rounded-full w-[40px] h-[40px] bg-white flex justify-center items-center font-jostBodyBold font-700">
+                    <HeartIcon
+                      className="block h-5 w-5 text-dark"
+                      aria-hidden="true"
+                    />
+                  </button>
+                  <button className="rounded-full w-[40px] h-[40px] bg-white flex justify-center items-center font-jostBodyBold font-700">
+                    <ArrowsRightLeftIcon
+                      className="block h-5 w-5 text-dark"
+                      aria-hidden="true"
+                    />
+                  </button>
+                  <button className="rounded-full w-[40px] h-[40px] bg-white flex justify-center items-center font-jostBodyBold font-700">
+                    <Eye
+                      className="block h-5 w-5 text-dark"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </div>
                 <Image
                   width={262}
                   height={429}
@@ -114,7 +155,11 @@ const OurBestseller = function () {
                   alt={product.imageAlt}
                   className="h-full w-full object-cover object-center"
                 />
-                <button className="bg-white z-[99999] w-[182px] transition ease-in delay-50 rounded-10 p-5 absolute bottom-0  mb-5 text-dark font-400 text-16 font-jostBodyRegular  drop-shadow-boxShadow  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
+                <button
+                  className={`bg-white ${
+                    isShow[product.id] ? "visible" : "invisible"
+                  }  w-[182px] rounded-10 p-4 absolute bottom-0  mb-5 text-dark font-400 text-16 font-jostBodyRegular  drop-shadow-boxShadow  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow`}
+                >
                   Add to Cart
                 </button>
               </div>

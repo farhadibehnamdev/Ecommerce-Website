@@ -44,7 +44,7 @@ const ShopByCategories = function () {
               src="/images/casual.png"
               alt="casual"
             />
-            <button className="bg-white rounded-10 absolute bottom-0 transition ease-in delay-50  mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
+            <button className="bg-white rounded-10 absolute bottom-0 transition ease-in delay-75  mb-5 text-dark font-400 text-16 font-jostBodyRegular pl-14 pr-14 py-5 shadow-xl  hover:bg-dark600 hover:text-white hover:drop-shadow-boxShadow">
               Casual Wear
             </button>
           </div>
