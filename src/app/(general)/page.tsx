@@ -1,7 +1,8 @@
-import Hero from "@/components/hero/Hero";
 import DealsOfTheMonth from "@/components/presentational/DealsOfTheMonth";
+import Hero from "@/components/presentational/Hero";
 import OurBestseller from "@/components/presentational/OurBestseller";
 import ShopByCategories from "@/components/presentational/ShopByCategories";
+import WebsiteFeatures from "@/components/presentational/WebsiteFeatures";
 import WhatCustomerSays from "@/components/presentational/WhatCustomerSays";
 import Image from "next/image";
 
@@ -13,6 +14,7 @@ export default function Home() {
       <OurBestseller />
       <DealsOfTheMonth />
       <WhatCustomerSays />
+      <WebsiteFeatures />
     </main>
   );
 }
