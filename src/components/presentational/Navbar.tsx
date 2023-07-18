@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
-import { ShoppingCart } from "../presentational/ShoppingCart";
+import { ShoppingCart } from "./ShoppingCart";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
