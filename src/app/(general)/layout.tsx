@@ -1,6 +1,6 @@
 import Navbar from "@/components/presentational/Navbar";
 import "@/app/globals.css";
-import { Footer } from "@/components/footer/Footer";
+import { Footer } from "@/components/presentational/Footer";
 
 export const metadata = {
   title: "Ecommerce Website",
