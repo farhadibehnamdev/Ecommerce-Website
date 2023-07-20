@@ -7,8 +7,8 @@ import {
 
 const WebsiteFeatures = function () {
   return (
-    <div className="max-w-[1140px] mt-[100px] ">
-      <div className="lg:grid lg:grid-cols-4 md:grid md:grid-cols-3 md:gap-20 sm:grid sm:grid-cols-2 sm:gap-20 xs:gap-y-20 lg:gap-x-20  mb-[100px] lg:mx-28 xl:mx-0">
+    <div className="max-w-[1140px] sm:w-full mt-[100px] mx-auto">
+      <div className="w-fit mx-auto lg:grid lg:grid-cols-4   md:grid md:grid-cols-3  sm:grid sm:grid-cols-2 sm:gap-20 xs:grid xs:grid-cols-2  xs:gap-x-20 xs:pl-30px xs:mx-auto lg:gap-x-20  mb-[100px] lg:pl-30px md:pl-30px xl:mx-0">
         <div className="flex flex-col xs:mb-30px">
           <PackageBoxTwoSide className="h-9 w-9 mb-4 text-dark" />
           <p className="text-16 text-dark font-jostBodyBold font-700 mb-1">

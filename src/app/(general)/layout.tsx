@@ -1,6 +1,7 @@
 import Navbar from "@/components/presentational/Navbar";
 import "@/app/globals.css";
 import { Footer } from "@/components/presentational/Footer";
+import WebsiteFeatures from "@/components/presentational/WebsiteFeatures";
 
 export const metadata = {
   title: "Ecommerce Website",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body className="bg-white">
         <Navbar />
         {children}
+        <WebsiteFeatures />
         <Footer />
       </body>
     </html>

@@ -3,13 +3,13 @@ import { ArrowRight } from "react-huge-icons/outline";
 
 const DealsOfTheMonth = function () {
   return (
-    <div className="w-[1140px] mb-36 ">
-      <div className="grid grid-cols-2 gap-6">
-        <div className="flex flex-col justify-center items-start">
-          <h2 className="text-dark font-400 text-[40px] font-jostBodyRegular mb-2">
+    <div className="max-w-[1140px] mb-36 ">
+      <div className="grid xl:grid-cols-2 lg:grid-cols-2 xs:grid-cols-1 md:mx-5 lg:mx-0 justify-center gap-6">
+        <div className="flex flex-col justify-center lg:items-start xs:items-center">
+          <h2 className="text-dark font-400 text-[40px] font-jostBodyRegular mb-2 ">
             Deals of the Month
           </h2>
-          <p className="text-dark font-400 font-jostBodyRegular text-16 break-words mb-7">
+          <p className="text-dark font-400 font-jostBodyRegular text-16 break-words mb-7 lg:text-left xs:text-center">
             It is a long established fact that a reader will be distracted by
             the readable content of a page when looking at its layout. The point
             of using Lorem Ipsum is that it has a more-or-less normal
@@ -37,14 +37,13 @@ const DealsOfTheMonth = function () {
             <ArrowRight className="h-6 w-6 text-white flex items-center" />
           </button>
         </div>
-        <div>
-          <Image
-            width={553}
-            height={500}
-            src="/images/deals-photo.png"
-            alt="deals-of-the-month"
-          />
-        </div>
+        <Image
+          width={553}
+          height={500}
+          src="/images/deals-photo.png"
+          alt="deals-of-the-month"
+          className="object-cover xs:mx-auto"
+        />
       </div>
     </div>
   );
