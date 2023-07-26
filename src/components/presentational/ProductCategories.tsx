@@ -26,13 +26,13 @@ const ProductCategories = function () {
           <Disclosure
             as="div"
             key={section.id}
-            className="border-b border-gray-200 py-6 text-dark text-16 flex flex-col"
+            className="border-b border-grayOpacity py-6 text-dark text-16 flex flex-col"
           >
             {({ open }) => (
               <>
-                <h3 className="-my-3 flow-root">
+                <h3 className="-my-3 flow-root ">
                   <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                    <span className="font-medium text-gray-900">
+                    <span className="font-bold  text-dark text-[18px]">
                       {section.name}
                     </span>
                     <span className="ml-6 flex items-center">
