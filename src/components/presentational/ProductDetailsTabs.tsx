@@ -3,7 +3,7 @@ import AdditionalInfoTab from "./AdditionalInfoTab";
 import DescriptoinTab from "./DescriptionTab";
 import ReviewsTab from "./ReviewsTab";
 import { useState } from "react";
-const tabs = [
+let tabs: Tab[] = [
   {
     name: "Descriptions",
     component: <DescriptoinTab />,
@@ -18,11 +18,29 @@ const tabs = [
   },
   { name: "Reviews", component: <ReviewsTab />, href: "#", current: true },
 ];
+
+type Tab = {
+  name: string;
+  component: React.ReactElement;
+  href: string;
+  current: boolean;
+};
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 const ProductDetailsTabs = function () {
   const [currentTab, setCurrentTab] = useState(tabs[0]);
+  const handleTab = function (tab: Tab) {
+    const newTabs = tabs.map((t) => {
+      if (t.name === tab.name) {
+        return { ...t, current: true };
+      } else {
+        return { ...t, current: false };
+      }
+    });
+    tabs = newTabs;
+    setCurrentTab(tab);
+  };
   return (
     <>
       <section aria-labelledby="details-heading" className="mt-12 text-dark5">
@@ -45,29 +63,29 @@ const ProductDetailsTabs = function () {
           </div>
           <div className="hidden sm:block">
             <div className="border-b border-gray-200">
-              <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+              <div className="-mb-px  flex space-x-8" aria-label="Tabs">
                 {tabs.map((tab) => (
-                  <a
+                  <span
                     key={tab.name}
-                    href={tab.href}
+                    // href={tab.href}
                     className={classNames(
                       tab.current
-                        ? "border-dark text-dark font-700"
-                        : "border-transparent text-dark  hover:border-gray-300 hover:text-gray-700",
+                        ? "border-dark text-dark text-16 font-jostBodyBold font-extrabold cursor-pointer"
+                        : "border-transparent text-dark  hover:border-gray-300 cursor-pointer hover:text-gray-700",
                       "whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
                     )}
                     aria-current={tab.current ? "page" : undefined}
-                    onChange={() => setCurrentTab(tab)}
+                    onClick={() => handleTab(tab)}
                   >
                     {tab.name}
-                  </a>
+                  </span>
                 ))}
-              </nav>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <section className="h-auto w-full bg-red-600">
+      <section className="h-auto w-ful">
         <div className="text-dark text-16">{currentTab.component}</div>
       </section>
     </>
