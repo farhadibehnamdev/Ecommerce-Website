@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosInstance } from "axios";
 import {
   ApiError,
   ApiExecutor,
@@ -56,3 +56,19 @@ const withAbort = <T>(fn: WithAbortFn) => {
   };
   return executor;
 };
+
+const api = (axios: AxiosInstance) => {
+  return {
+    get: <T>(url: string, config: ApiRequestConfig = {}) =>
+      withAbort<T>(axios.get)(url, config),
+    delete: <T>(url: string, config: ApiRequestConfig = {}) =>
+      withAbort<T>(axios.delete)(url, config),
+    post: <T>(url: string, body: unknown, config: ApiRequestConfig = {}) =>
+      withAbort<T>(axios.post)(url, body, config),
+    patch: <T>(url: string, body: unknown, config: ApiRequestConfig = {}) =>
+      withAbort<T>(axios.patch)(url, body, config),
+    put: <T>(url: string, body: unknown, config: ApiRequestConfig = {}) =>
+      withAbort<T>(axios.put)(url, body, config),
+  };
+};
+export default api(axiosInstance);
