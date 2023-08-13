@@ -1,8 +1,27 @@
+"use client";
+
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+type RegisterFormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
 
 const Register = function () {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormValues>();
+  const onSubmit = (data: RegisterFormValues) => console.log(data);
+
   return (
-    <div className="flex flex-1 bg-white min-h-full">
+    <div className="flex flex-1 bg-white text-dark min-h-full">
       <div className="relative hidden w-0 flex-1 lg:block">
         <Image
           width={0}
@@ -27,7 +46,7 @@ const Register = function () {
 
           <div className="mt-10">
             <div>
-              <form action="#" method="POST" className="space-y-7">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
                 <div>
                   <label
                     htmlFor="fistName"
@@ -37,10 +56,7 @@ const Register = function () {
                   </label>
                   <div className="mt-2">
                     <input
-                      id="fistName"
-                      name="fistName"
-                      type="text"
-                      required
+                      {...register("firstName")}
                       placeholder="Robert"
                       className="block w-full rounded-10 text-16 border-0 px-4 py-4 shadow-sm ring-1 ring-slate-800"
                     />
@@ -55,10 +71,8 @@ const Register = function () {
                   </label>
                   <div className="mt-2">
                     <input
-                      id="lastName"
-                      name="lastName"
+                      {...register("lastName")}
                       type="text"
-                      required
                       placeholder="Fox"
                       className="block w-full rounded-10 text-16 border-0 px-4 py-4 shadow-sm ring-1 ring-slate-800"
                     />
@@ -73,15 +87,24 @@ const Register = function () {
                   </label>
                   <div className="mt-2">
                     <input
-                      id="email"
-                      name="email"
+                      {...register("email", {
+                        required: "A email is required.",
+                      })}
                       type="email"
-                      autoComplete="email"
-                      required
                       placeholder="email@example.com"
-                      className="block w-full rounded-10 text-16 border-0 px-4 py-4 shadow-sm ring-1 ring-slate-800"
+                      aria-invalid="true"
+                      aria-describedby="email-error"
+                      className={`${
+                        errors.email &&
+                        " ring-red-500 focus:ring-0 border-red-500 outline-none border-solid border-[1px]"
+                      } block w-full rounded-10 text-16  px-4 py-4 shadow-sm ring-1 ring-slate-800 `}
                     />
                   </div>
+                  {errors.email && (
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      Not a valid email address.
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label
@@ -92,41 +115,23 @@ const Register = function () {
                   </label>
                   <div className="mt-2">
                     <input
-                      id="password"
-                      name="password"
+                      {...register("password", {
+                        required: "A password field is required.",
+                      })}
                       type="password"
                       autoComplete="current-password"
-                      required
                       placeholder="**********"
-                      className="block w-full rounded-10 text-16 border-0 px-4 py-4 shadow-sm ring-1 ring-slate-800"
+                      className={`${
+                        errors.email &&
+                        " ring-red-500 focus:ring-0 border-red-500 outline-none border-solid border-[1px]"
+                      } block w-full rounded-10 text-16  px-4 py-4 shadow-sm ring-1 ring-slate-800 `}
                     />
+                    {errors.password && (
+                      <p className="mt-2 text-sm text-red-600" id="email-error">
+                        {errors.password.message}
+                      </p>
+                    )}
                   </div>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="terms-conditions"
-                      name="terms-conditions"
-                      type="checkbox"
-                      className="h-4 w-4 px-2 py-2 accent-dark text-xs rounded-10 font-jostBodyRegular border-gray-300"
-                    />
-                    <label
-                      htmlFor="remember-me"
-                      className="ml-3 block  font-jostBodyRegular text-16 leading-6 text-dark"
-                    >
-                      I agree to the{" "}
-                      <span className="text-16 font-700 font-jostBodyBold text-dark">
-                        Terms & Conditions
-                      </span>
-                    </label>
-                  </div>
-
-                  {/* <div className="text-14 font-jostBodyRegular font-400 leading-23">
-                    <a href="#" className="text-dark">
-                      Forgot password?
-                    </a>
-                  </div> */}
                 </div>
 
                 <div>
