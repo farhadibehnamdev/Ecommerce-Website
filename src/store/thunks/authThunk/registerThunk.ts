@@ -6,12 +6,13 @@ export type registerParams = {
   lastName: string;
   email: string;
   password: string;
+  role: string;
 };
 
 export const registerThunk = createAsyncThunk(
   "auth/register",
   async (
-    { firstName, lastName, email, password }: registerParams,
+    { firstName, lastName, email, password, role = "User" }: registerParams,
     thunkAPI
   ) => {
     try {
@@ -20,8 +21,9 @@ export const registerThunk = createAsyncThunk(
         lastName,
         email,
         password,
+        role,
       });
-      if (response.status === 200) {
+      if (response.status === 201) {
         return response.data;
       } else {
         return thunkAPI.rejectWithValue(response);
