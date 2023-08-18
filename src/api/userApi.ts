@@ -8,6 +8,7 @@ export interface RegisterUserApiResponse {
   message: string;
   user: User;
   tokens: Tokens;
+  emailVerificationToken: string;
 }
 
 interface User {
@@ -34,5 +35,22 @@ interface Tokens {
 }
 
 export const registerUserApi = async function (params: registerParams) {
-  return await api.post<RegisterUserApiResponse>(URLS.registerUser, params);
+  const response = await api.post<RegisterUserApiResponse>(
+    URLS.registerUser,
+    params
+  );
+  return response;
+};
+
+export const sendVerificationEmailApi = async function (token: string) {
+  return await api.post<string>(
+    URLS.sendVerificationEmail,
+    {},
+    {
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
