@@ -3,7 +3,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { GiConfirmed } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 
-const EmailVerified = function ({ message }: { message: string }) {
+const VerifiedEmail = function ({ message }: { message: string }) {
   const router = useRouter();
   const handleBackToHome = function () {
     router.push("/");
@@ -35,4 +35,4 @@ const EmailVerified = function ({ message }: { message: string }) {
   );
 };
 
-export default EmailVerified;
+export default VerifiedEmail;
