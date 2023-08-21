@@ -1,6 +1,7 @@
 import { registerParams } from "@/store/thunks/authThunk/registerThunk";
 import api from "./api";
 import { URLS } from "./constants";
+import { loginParams } from "@/store/thunks/authThunk/loginThunk";
 
 export interface RegisterUserApiResponse {
   type: string;
@@ -10,6 +11,8 @@ export interface RegisterUserApiResponse {
   tokens: Tokens;
   emailVerificationToken: string;
 }
+
+export interface LoginUserApiResponse extends RegisterUserApiResponse {}
 
 interface User {
   firstName: string;
@@ -40,6 +43,10 @@ export const registerUserApi = async function (params: registerParams) {
     params
   );
   return response;
+};
+
+export const logingUserApi = async function (params: loginParams) {
+  return await api.post<LoginUserApiResponse>(URLS.loginUser, params);
 };
 
 export const sendVerificationEmailApi = async function (token: string) {
