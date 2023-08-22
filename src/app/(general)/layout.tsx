@@ -1,7 +1,9 @@
-import Navbar from "@/components/presentational/Navbar";
+import Navbar from "@/components/website/presentational/Navbar";
 import "@/app/globals.css";
-import { Footer } from "@/components/presentational/Footer";
-import WebsiteFeatures from "@/components/presentational/WebsiteFeatures";
+import { Footer } from "@/components/website/presentational/Footer";
+import WebsiteFeatures from "@/components/website/presentational/WebsiteFeatures";
+import { ReduxProvider } from "@/store/provider";
+import NavbarContainer from "@/components/website/containers/NavbarContainer";
 
 export const metadata = {
   title: "Ecommerce Website",
@@ -16,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white">
-        <Navbar />
-        {children}
-        <WebsiteFeatures />
-        <Footer />
+        <ReduxProvider>
+          <NavbarContainer />
+          {children}
+          <WebsiteFeatures />
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );
