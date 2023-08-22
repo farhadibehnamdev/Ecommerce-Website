@@ -1,9 +1,8 @@
-import DealsOfTheMonth from "@/components/presentational/DealsOfTheMonth";
-import Hero from "@/components/presentational/Hero";
-import OurBestseller from "@/components/presentational/OurBestseller";
-import ShopByCategories from "@/components/presentational/ShopByCategories";
-import WhatCustomerSays from "@/components/presentational/WhatCustomerSays";
-import Image from "next/image";
+import DealsOfTheMonth from "@/components/website/presentational/DealsOfTheMonth";
+import Hero from "@/components/website/presentational/Hero";
+import OurBestseller from "@/components/website/presentational/OurBestseller";
+import ShopByCategories from "@/components/website/presentational/ShopByCategories";
+import WhatCustomerSays from "@/components/website/presentational/WhatCustomerSays";
 
 export default function Home() {
   return (
