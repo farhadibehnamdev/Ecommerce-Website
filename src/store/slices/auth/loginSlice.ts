@@ -7,6 +7,7 @@ type loginState = {
   isError: boolean;
   isSuccess: boolean;
   errorMessage: string;
+  isAuth: boolean;
   data: LoginUserApiResponse | null;
 };
 
@@ -15,6 +16,7 @@ const initialState: loginState = {
   isError: false,
   isSuccess: false,
   errorMessage: "",
+  isAuth: false,
   data: null,
 };
 
@@ -41,11 +43,12 @@ export const loginSlice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.isSuccess = true;
+        state.isAuth = true;
         state.data = action.payload;
       });
   },
 });
 
 export const { clearState } = loginSlice.actions;
-export const loginSelector = (state: any) => state.loginReducer;
+export const loginSelector = (state: any) => state.login;
 export const loginReducer = loginSlice.reducer;
