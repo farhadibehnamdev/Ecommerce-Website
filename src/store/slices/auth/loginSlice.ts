@@ -24,6 +24,10 @@ export const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
+    logout: (state) => {
+      state.isAuth = false;
+      state.data = null;
+    },
     clearState: (state) => {
       state.isError = false;
       state.isFetching = false;
@@ -49,6 +53,6 @@ export const loginSlice = createSlice({
   },
 });
 
-export const { clearState } = loginSlice.actions;
+export const { clearState, logout } = loginSlice.actions;
 export const loginSelector = (state: any) => state.login;
 export const loginReducer = loginSlice.reducer;
