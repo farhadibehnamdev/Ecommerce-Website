@@ -6,19 +6,37 @@ import {
   ApiRequestConfig,
   WithAbortFn,
 } from "./api.types";
+import {
+  requestInterceptor,
+  requestInterceptorError,
+  responseInterceptor,
+  responseInterceptorError,
+} from "@/api/interceptors";
 
 const axiosParams = {
-  baseURL: "http://localhost:8080/api/",
+  baseURL: "http://localhost:8080/",
+  headers: {
+    "Content-Type": "application/json",
+  },
   // process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "/",
 };
 
-const axiosInstance = axios.create(axiosParams);
+export const axiosInstance = axios.create(axiosParams);
+
+axiosInstance.interceptors.request.use(
+  requestInterceptor,
+  requestInterceptorError
+);
+
+axiosInstance.interceptors.response.use(
+  responseInterceptor,
+  responseInterceptorError
+);
 
 const didAbort = (error: AxiosError) => axios.isCancel(error);
 
 const getCancelSource = () => axios.CancelToken.source();
 
-//TODO :: Read about user-type guard in typescript
 export const isApiError = (error: unknown): error is ApiError => {
   return axios.isAxiosError(error);
 };

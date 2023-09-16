@@ -14,7 +14,7 @@ export interface RegisterUserApiResponse {
 
 export interface LoginUserApiResponse extends RegisterUserApiResponse {}
 
-interface User {
+export interface User {
   firstName: string;
   lastName: string;
   email: string;
