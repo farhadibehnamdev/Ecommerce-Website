@@ -1,4 +1,5 @@
 "use client";
+import api from "@/api/api";
 import Navbar from "@/components/website/presentational/Navbar";
 import { useAppSelector } from "@/store/hooks";
 import { loginSelector, logout } from "@/store/slices/auth/loginSlice";
@@ -12,8 +13,13 @@ const NavbarContainer = function () {
     const date = new Date(expires);
     const now = new Date();
     if (now.getTime() > date.getTime()) {
-      console.log("hi hi HI::");
-      dispatch(logout());
+      let status = false;
+      api.get("auth/logout").then((res) => {
+        if (res.status === 200) {
+          status = true;
+        }
+      });
+      if (status) dispatch(logout());
     }
   }
   return <Navbar isAuth={isAuth} />;
