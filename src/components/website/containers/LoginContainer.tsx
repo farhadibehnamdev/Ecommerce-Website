@@ -2,49 +2,36 @@
 import Login, {
   LoginFormType,
 } from "@/components/website/presentational/Login";
-import useNotification from "@/hooks/useNotification";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { clearState, loginSelector } from "@/store/slices/auth/loginSlice";
-import { loginThunk } from "@/store/thunks/authThunk/loginThunk";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
-
+import { useMutation } from "@tanstack/react-query";
+import { logingUserApi } from "@/api/userApi";
+import useCustomToast from "@/hooks/useCustomToast";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { VscError } from "react-icons/vsc";
+const userLogin = async function (params: LoginFormType) {
+  const response = await logingUserApi(params);
+  return response.data;
+};
 const LoginContainer = () => {
-  const { showNotice, message, show, setShow, noticeType } = useNotification();
-  const dispatch = useAppDispatch();
+  const loginMutation = useMutation(userLogin);
   const router = useRouter();
-  const { data, isError, isFetching, isSuccess, errorMessage } =
-    useAppSelector(loginSelector);
-
-  const handleSubmitLoginForm = (formData: LoginFormType) => {
-    dispatch(loginThunk(formData));
+  const toast = useCustomToast();
+  const handleSubmitLoginForm = async (formData: LoginFormType) => {
+    loginMutation.mutate(formData);
+    setTimeout(() => {
+      router.push("/");
+    }, 3000);
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      showNotice("You have successfully logged in", "success");
-      let timeoutId = setTimeout(() => {
-        router.push("/");
-        clearTimeout(timeoutId);
-      }, 2000);
-    } else if (isError) {
-      showNotice(errorMessage, "fail");
-    }
-    return () => {
-      dispatch(clearState());
-    };
-  }, [isSuccess, isError, showNotice]);
+  loginMutation.isSuccess &&
+    toast(
+      "You have successfully logged in",
+      <BsFillCheckCircleFill className="w-4 h-4" />
+    );
+  loginMutation.isError &&
+    toast("Something went wrong!", <VscError className="w-4 h-4" />);
 
-  return (
-    <Login
-      handleSubmitLoginForm={handleSubmitLoginForm}
-      isFetching={isFetching}
-      message={message}
-      show={show}
-      setShow={setShow}
-      noticeType={noticeType}
-    />
-  );
+  return <Login handleSubmitLoginForm={handleSubmitLoginForm} />;
 };
 
 export default LoginContainer;
