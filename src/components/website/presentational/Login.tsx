@@ -5,7 +5,7 @@ import { CSSProperties } from "react";
 import { useForm } from "react-hook-form";
 import { BounceLoader, ClipLoader } from "react-spinners";
 import Notification from "./Notification";
-
+import { Toaster } from "react-hot-toast";
 export type LoginFormType = {
   email: string;
   password: string;
@@ -18,14 +18,7 @@ const override: CSSProperties = {
   borderColor: "white",
 };
 
-const Login = function ({
-  isFetching,
-  message,
-  show,
-  setShow,
-  noticeType,
-  handleSubmitLoginForm,
-}: any) {
+const Login = function ({ handleSubmitLoginForm }: any) {
   const {
     register,
     handleSubmit,
@@ -36,12 +29,7 @@ const Login = function ({
   };
   return (
     <div className="flex flex-1 bg-white min-h-full">
-      <Notification
-        message={message}
-        show={show}
-        setShow={setShow}
-        noticeType={noticeType}
-      />
+      <Toaster />
       <div className="relative hidden w-0 flex-1 lg:block">
         <Image
           width={0}
@@ -151,14 +139,6 @@ const Login = function ({
                   >
                     <span className="flex justify-center gap-2">
                       <span>Login</span>
-                      <BounceLoader
-                        color="#fff"
-                        loading={isFetching}
-                        cssOverride={override}
-                        size={25}
-                        aria-label="Loading Spinner"
-                        data-testid="loader"
-                      />
                     </span>
                   </button>
                 </div>
