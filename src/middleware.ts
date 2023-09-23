@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 const getUserRole = async function (request: NextRequest) {
   const token = request.cookies.get("access_token")?.value || "";
   try {
-    const res = await fetch("http://localhost:8080/auth/me", {
+    const res = await fetch("http://localhost:8080/auth/user-role", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -38,15 +38,8 @@ export async function middleware(request: NextRequest) {
   if (!isPublicPath && token) {
     const res: any = await getUserRole(request);
     if (res.role !== "Admin") {
-      console.log("You are not Admin :: ", res.role);
       return NextResponse.redirect(new URL("/", request.nextUrl));
     }
-    getUserRole(request).then((res: any) => {
-      if (res.role !== "Admin") {
-        console.log("You are not Admin :: ", res.role);
-        return NextResponse.redirect(new URL("/", request.nextUrl));
-      }
-    });
   }
 }
 
