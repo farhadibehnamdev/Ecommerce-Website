@@ -1,52 +1,55 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Register, {
   RegisterFormValues,
 } from "@/components/website/presentational/Register";
-import { registerThunk } from "@/store/thunks/authThunk/registerThunk";
-import {
-  clearState,
-  registerSelector,
-} from "@/store/slices/auth/registerSlice";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import useNotification from "@/hooks/useNotification";
+import { registerUserApi } from "@/api/userApi";
+import useCustomToast from "@/hooks/useCustomToast";
+import { useMutation } from "@tanstack/react-query";
+import { VscError } from "react-icons/vsc";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { useEffect } from "react";
+
+const registerUser = async function (data: RegisterFormValues) {
+  data.role = "Admin";
+  const response = await registerUserApi(data);
+  if (response.status >= 400) throw new Error(response.statusText);
+  return response.data;
+};
 
 const RegisterContainer = function () {
-  const dispatch = useAppDispatch();
-  const { showNotice, message, show, setShow, noticeType } = useNotification();
+  const registerMutation = useMutation(registerUser);
   const router = useRouter();
-  const { isFetching, isSuccess, isError, data, errorMessage } =
-    useAppSelector(registerSelector);
+  const toast = useCustomToast();
 
   const handleSubmitForm = (data: RegisterFormValues) => {
-    dispatch(registerThunk(data));
+    registerMutation.mutate(data);
   };
+
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    if (isSuccess) {
-      showNotice("Thank you for signing up", "success");
-      timeoutId = setTimeout(() => {
-        router.push("/auth/verify-email");
-      }, 3000);
-    } else if (isError) {
-      showNotice(errorMessage, "fail");
+    if (registerMutation.isLoading) {
+      toast("Loading...", null, "loading");
+    } else if (registerMutation.isSuccess) {
+      toast(
+        "Thank you for signing up",
+        <BsFillCheckCircleFill className="w-4 h-4 text-black" />
+      );
+
+      router.push(`/auth/verify-email`);
+    } else if (registerMutation.isError) {
+      toast(
+        registerMutation.error as string,
+        <VscError className="w-4 h-4 text-black" />
+      );
     }
-    return function () {
-      dispatch(clearState());
-      if (timeoutId) window.clearTimeout(timeoutId);
-    };
-  }, [isSuccess, isError]);
-  return (
-    <Register
-      handleSubmitForm={handleSubmitForm}
-      message={message}
-      show={show}
-      setShow={setShow}
-      noticeType={noticeType}
-      isFetching={isFetching}
-    />
-  );
+  }, [
+    registerMutation.isLoading,
+    registerMutation.data,
+    registerMutation.isError,
+    registerMutation.isSuccess,
+  ]);
+
+  return <Register handleSubmitForm={handleSubmitForm} />;
 };
 export default RegisterContainer;
