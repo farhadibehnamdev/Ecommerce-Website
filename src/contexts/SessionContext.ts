@@ -1,19 +1,18 @@
+"use client";
 import { User } from "@/api/userApi";
-import React from "react";
-export interface SessionContextType {
+import { createContext } from "react";
+export interface ISessionContext {
   user: User | undefined;
   isLoading: boolean;
   refetch: Function;
   isFetching: boolean;
 }
-const defaultSessionContext: SessionContextType = {
+const defaultSessionContext: ISessionContext = {
   user: undefined,
   isLoading: false,
   refetch: Function,
   isFetching: false,
 };
-const SessionContext = React.createContext<SessionContextType>(
-  defaultSessionContext
-);
+const SessionContext = createContext<ISessionContext>(defaultSessionContext);
 
 export default SessionContext;

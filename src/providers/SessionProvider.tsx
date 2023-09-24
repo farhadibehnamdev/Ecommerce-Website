@@ -1,21 +1,22 @@
 "use client";
 import SessionContext from "@/contexts/SessionContext";
 import { useQuery } from "@tanstack/react-query";
-import { profile } from "@/api/userApi";
+import { User, profile } from "@/api/userApi";
 
 const fetchUser = async function () {
   const response = await profile();
   if (response.status >= 400) throw new Error(response.statusText);
-  return response.data;
+  if (response.status === 200) return response.data;
 };
+
 const SessionProvider = function ({ children }: { children: React.ReactNode }) {
   const {
-    data: user,
     isLoading,
-    isSuccess,
+    data,
+    error,
     isFetching,
     refetch,
-  } = useQuery(["user"], () => fetchUser(), {
+  } = useQuery(["user"], fetchUser, {
     retry: (failureCount: number, error: any) => {
       if (error.response?.status === 401) {
         return false;
@@ -26,11 +27,24 @@ const SessionProvider = function ({ children }: { children: React.ReactNode }) {
     },
     refetchOnWindowFocus: false,
   });
+
+
+
+  
+ 
   return (
-    <SessionContext.Provider value={{ user, isLoading, refetch, isFetching }}>
+    <SessionContext.Provider
+      value={{
+        user:data?.user,
+        isLoading,
+        refetch,
+        isFetching,
+      }}
+    >
       {children}
     </SessionContext.Provider>
   );
 };
 
 export default SessionProvider;
+
