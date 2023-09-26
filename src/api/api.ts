@@ -12,7 +12,6 @@ import {
   responseInterceptor,
   responseInterceptorError,
 } from "@/api/interceptors";
-
 const axiosParams = {
   baseURL: "http://localhost:8080/",
   headers: {
@@ -22,7 +21,7 @@ const axiosParams = {
 };
 
 export const axiosInstance = axios.create(axiosParams);
-
+axiosInstance.defaults.withCredentials = true;
 axiosInstance.interceptors.request.use(
   requestInterceptor,
   requestInterceptorError
