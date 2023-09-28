@@ -11,13 +11,21 @@ import {
   MagnifyingGlassIcon,
   SquaresPlusIcon,
 } from "@heroicons/react/20/solid";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useState } from "react";
 import { ShoppingCart } from "./ShoppingCart";
 import { Heart, MenuLineHorizontal, Search } from "react-huge-icons/outline";
 import Link from "next/link";
-import { useAppSelector } from "@/store/hooks";
-import { loginSelector } from "@/store/slices/auth/loginSlice";
+import api from "@/api/api";
+import { User } from "@/api/userApi";
+import { QueryClient } from "@tanstack/react-query";
+import ContentLoader from "react-content-loader";
+type NavbarProps = {
+  user: User;
+  isLoading: boolean;
+  refetch: Function;
+  query: QueryClient;
+  isFetching: boolean;
+};
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -74,8 +82,9 @@ const solutions = [
     ],
   },
 ];
-
-const Navbar = function ({ isAuth }: { isAuth: boolean }) {
+//TODO:refactor
+const Navbar = function ({ user, isLoading, query }: NavbarProps) {
+  console.log("user navbar::", user);
   const [activePanel, setActivePanel] = useState("");
   const [openSearch, setOpenSearch] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -83,7 +92,14 @@ const Navbar = function ({ isAuth }: { isAuth: boolean }) {
     setActivePanel(panel);
     setOpenSearch(!openSearch);
   };
-  const handleClick2 = (panel: string) => {
+  //TODO:Take this out to parent
+  const handleLogout = async function () {
+    const response = await api.get("auth/logout");
+    if (response.status === 200) {
+      query.resetQueries(["user"]);
+    }
+  };
+  const handleMenuClick = (panel: string) => {
     setActivePanel(panel);
     setOpenMenu(!openMenu);
   };
@@ -108,7 +124,7 @@ const Navbar = function ({ isAuth }: { isAuth: boolean }) {
                 </div>
               </div>
               <Disclosure.Button
-                onClick={() => handleClick2("menu")}
+                onClick={() => handleMenuClick("menu")}
                 className="lg:hidden md:inline-flex xs:inline-flex sm:inline-flex  items-center justify-start rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
               >
                 <span className="sr-only">Open main menu</span>
@@ -179,7 +195,7 @@ const Navbar = function ({ isAuth }: { isAuth: boolean }) {
                   href="#"
                   className="inline-flex font-jostBodyRegular text-16 font-normal leading-23 items-center border-b-2 border-transparent px-1 pt-1  text-dark hover:border-gray-300 hover:text-gray-700"
                 >
-                  Contact Us
+                  {user?.firstName}
                 </a>
               </div>
               <div className=" xs:flex xs:ml-4 xs:gap-6 sm:gap-6 sm:ml-4 md:ml-4 md:justify-start md:flex lg:ml-4 lg:flex lg:items-center gap-5">
@@ -203,7 +219,7 @@ const Navbar = function ({ isAuth }: { isAuth: boolean }) {
                     </div>
                   </div>
                   <div className="flex-shrink-0  xs:flex sm:flex">
-                    {isAuth ? (
+                    {user ? (
                       <div className="flex items-center text-dark">
                         {/* Mobile menu button */}
 
@@ -269,6 +285,7 @@ const Navbar = function ({ isAuth }: { isAuth: boolean }) {
                                       active ? "bg-gray-100" : "",
                                       "block px-4 py-2 text-sm text-gray-700"
                                     )}
+                                    onClick={handleLogout}
                                   >
                                     Sign out
                                   </a>
@@ -278,6 +295,17 @@ const Navbar = function ({ isAuth }: { isAuth: boolean }) {
                           </Transition>
                         </Menu>
                       </div>
+                    ) : isLoading ? (
+                      <ContentLoader
+                        speed={1}
+                        width={32}
+                        height={32}
+                        viewBox="0 0 40 40"
+                        backgroundColor="#f3f3f3"
+                        foregroundColor="#c6c3c3"
+                      >
+                        <circle cx="20" cy="20" r="20" />
+                      </ContentLoader>
                     ) : (
                       <Link
                         href="/auth/login"
