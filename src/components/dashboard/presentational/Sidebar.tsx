@@ -19,17 +19,33 @@ import {
   PiUsersDuotone,
 } from "react-icons/pi";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 const navigation = [
-  { name: "Dashboard", href: "#", icon: PiHouseDuotone, current: true },
-  { name: "Products", href: "#", icon: PiTShirtDuotone, current: false },
-  { name: "Categories", href: "#", icon: PiFolderDuotone, current: false },
-  { name: "Brands", href: "#", icon: PiBrandyDuotone, current: false },
-  { name: "Colors", href: "#", icon: PiPaletteDuotone, current: false },
-  { name: "Size", href: "#", icon: PiTextAaDuotone, current: false },
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    icon: PiHouseDuotone,
+    current: true,
+  },
+  {
+    name: "Products",
+    href: "/dashboard/products",
+    icon: PiTShirtDuotone,
+    current: false,
+  },
+  {
+    name: "Categories",
+    href: "/categories",
+    icon: PiFolderDuotone,
+    current: false,
+  },
+  { name: "Brands", href: "/brands", icon: PiBrandyDuotone, current: false },
+  { name: "Colors", href: "/colors", icon: PiPaletteDuotone, current: false },
+  { name: "Size", href: "/size", icon: PiTextAaDuotone, current: false },
   {
     id: 1,
     name: "Users",
-    href: "#",
+    href: "/users",
 
     current: false,
     icon: PiUsersDuotone,
@@ -37,7 +53,7 @@ const navigation = [
   {
     id: 2,
     name: "Reviews",
-    href: "#",
+    href: "/reviews",
     initial: "T",
     current: false,
     icon: PiChatCenteredTextDuotone,
@@ -45,7 +61,7 @@ const navigation = [
   {
     id: 3,
     name: "Orders",
-    href: "#",
+    href: "/orders",
     initial: "W",
     current: false,
     icon: PiShoppingBagOpenDuotone,
@@ -53,7 +69,7 @@ const navigation = [
   {
     id: 4,
     name: "Favorites",
-    href: "#",
+    href: "/favorites",
     initial: "W",
     current: false,
     icon: PiHeartDuotone,
@@ -61,7 +77,7 @@ const navigation = [
   {
     id: 5,
     name: "Discounts",
-    href: "#",
+    href: "/discounts",
     initial: "W",
     current: false,
     icon: PiPercentDuotone,
@@ -210,7 +226,7 @@ export default function Sidebar() {
                 <ul role="list" className="-mx-2 space-y-1">
                   {navigation.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className={classNames(
                           item.current
@@ -229,7 +245,7 @@ export default function Sidebar() {
                           aria-hidden="true"
                         />
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
