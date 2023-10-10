@@ -4,12 +4,8 @@ import { HomeIcon } from "@heroicons/react/20/solid";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
 const BreadcrumbUI = function () {
   const path = useBreadcrumb();
-  console.log("path ::", path);
   return (
     <nav className="flex " aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4 md:mx-5">
