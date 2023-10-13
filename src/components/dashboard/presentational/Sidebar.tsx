@@ -1,5 +1,4 @@
 "use client";
-import "@/styles/globals.css";
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
@@ -44,8 +43,8 @@ const navigation = [
   { name: "Size", href: "/size", icon: PiTextAaDuotone, current: false },
   {
     id: 1,
-    name: "Users",
-    href: "/users",
+    name: "Customers",
+    href: "/customers",
 
     current: false,
     icon: PiUsersDuotone,
@@ -83,7 +82,6 @@ const navigation = [
     icon: PiPercentDuotone,
   },
 ];
-// const teams = [];
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
