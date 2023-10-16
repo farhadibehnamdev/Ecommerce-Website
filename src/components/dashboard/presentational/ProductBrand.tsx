@@ -1,7 +1,14 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { Select, SelectItem } from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Divider,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 
 type Person = {
   id: number;
@@ -37,39 +44,43 @@ const ProductBrand = function () {
   const [query, setQuery] = useState("");
 
   return (
-    <div className="col-span-12 mb-5 rounded-md bg-white p-5 shadow-sm gap-x-8 gap-y-8 md:grid-cols-2">
-      <h3 className=" mb-4  text-lg font-bold text-zinc-800 leading-6">
-        Category
-      </h3>
-      <Select
-        labelPlacement="outside"
-        variant="bordered"
-        label="Please select a category"
-        className="w-full"
-        placeholder="No items has been selected."
-        size="md"
-      >
-        {people.map((curr) => (
-          <SelectItem
-            className="text-slate-800"
-            key={curr.value}
-            value={curr.value}
-          >
-            <span className="flex items-center">
-              <Image
-                width={30}
-                height={30}
-                src={curr.imageUrl}
-                alt=""
-                className="h-6 w-6 flex-shrink-0 rounded-full"
-              />
+    <Card className="bg-white w-full mb-4" shadow="sm" radius="sm">
+      <CardHeader className="mt-2 px-4">
+        <h3 className="text-[25px] font-bold">Brand</h3>
+      </CardHeader>
+      <Divider className="mb-2" />
+      <CardBody className="overflow-hidden">
+        <Select
+          labelPlacement="outside"
+          variant="bordered"
+          label="Please select a brand"
+          className="w-full"
+          placeholder="No items has been selected."
+          size="md"
+        >
+          {people.map((curr) => (
+            <SelectItem
+              className="text-slate-800"
+              key={curr.value}
+              value={curr.value}
+              textValue={curr.value}
+            >
+              <span className="flex items-center">
+                <Image
+                  width={30}
+                  height={30}
+                  src={curr.imageUrl}
+                  alt=""
+                  className="h-6 w-6 flex-shrink-0 rounded-full"
+                />
 
-              {curr.label}
-            </span>
-          </SelectItem>
-        ))}
-      </Select>
-    </div>
+                {curr.label}
+              </span>
+            </SelectItem>
+          ))}
+        </Select>
+      </CardBody>
+    </Card>
   );
 };
 
