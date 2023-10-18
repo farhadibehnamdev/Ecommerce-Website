@@ -39,7 +39,9 @@ const ProductFeature = function () {
   return (
     <Card className="bg-white w-full mb-4" shadow="sm" radius="sm">
       <CardHeader className="px-4 py-4">
-        <h3 className="text-[25px] bg- font-bold">Additional Feature</h3>
+        <h3 className="text-[22px] font-bold text-slate-600">
+          Additional Feature
+        </h3>
       </CardHeader>
       <Divider className="mb-2" />
       <CardBody className="overflow-hidden">

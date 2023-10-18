@@ -1,6 +1,4 @@
 "use client";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { Combobox } from "@headlessui/react";
 import { useState } from "react";
 import Image from "next/image";
 import {
@@ -8,7 +6,6 @@ import {
   CardBody,
   CardHeader,
   Divider,
-  Input,
   Select,
   SelectItem,
 } from "@nextui-org/react";
@@ -47,22 +44,20 @@ const people: Person[] = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
 ];
-
-// More users...
-const ProductTag = function () {
+const ProductCategory = function () {
   const [query, setQuery] = useState("");
 
   return (
     <Card className="bg-white w-full mb-4" shadow="sm" radius="sm">
       <CardHeader className="mt-2 px-4">
-        <h3 className="text-[25px] font-bold">Tag</h3>
+        <h3 className="text-[22px] font-bold text-slate-600">Category</h3>
       </CardHeader>
       <Divider className="mb-2" />
       <CardBody className="overflow-hidden">
         <Select
           labelPlacement="outside"
           variant="bordered"
-          label="Please select a tag"
+          label="Please select a category"
           className="w-full"
           placeholder="No items has been selected."
           size="md"
@@ -92,4 +87,5 @@ const ProductTag = function () {
     </Card>
   );
 };
-export default ProductTag;
+
+export default ProductCategory;

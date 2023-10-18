@@ -12,7 +12,7 @@ import {
   Spacer,
 } from "@nextui-org/react";
 
-const General = function ({ text, setText, register }: any) {
+const General = function ({ register }: any) {
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const log = () => {
     if (editorRef.current) {
@@ -21,9 +21,9 @@ const General = function ({ text, setText, register }: any) {
   };
   return (
     <>
-      <Card className="bg-white w-full" shadow="sm" radius="sm">
+      <Card className="bg-white w-full " shadow="sm" radius="sm">
         <CardHeader className="px-4 py-4">
-          <h3 className="text-[25px] font-bold">Basic Info</h3>
+          <h3 className="text-[22px] font-700 text-slate-600">Basic Info</h3>
         </CardHeader>
         <Divider className="mb-2" />
         <CardBody className="overflow-hidden">

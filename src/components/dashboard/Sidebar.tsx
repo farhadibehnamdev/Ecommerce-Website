@@ -146,9 +146,8 @@ export default function Sidebar() {
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                   <div className="flex h-16 shrink-0 items-center">
                     <Image
-                      width="0"
+                      width={32}
                       height={32}
-                      className="h-8 w-auto"
                       src="images/mark.svg"
                       alt="Your Company"
                     />
@@ -206,14 +205,13 @@ export default function Sidebar() {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden  text-sm  lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+      <div className="hidden shadow-sm  text-sm  lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex grow  flex-col gap-y-5 overflow-y-auto border-r border-light text-zinc-800 bg-white px-6 pb-4">
           <div className="flex h-16 shrink-0 items-center">
             <Image
-              width={0}
+              width={32}
               height={32}
-              className="h-8 w-auto"
               src="/images/mark.svg"
               alt="Your Company"
             />

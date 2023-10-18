@@ -46,7 +46,7 @@ const ProductBrand = function () {
   return (
     <Card className="bg-white w-full mb-4" shadow="sm" radius="sm">
       <CardHeader className="mt-2 px-4">
-        <h3 className="text-[25px] font-bold">Brand</h3>
+        <h3 className="text-[22px] font-bold text-slate-600">Brand</h3>
       </CardHeader>
       <Divider className="mb-2" />
       <CardBody className="overflow-hidden">
