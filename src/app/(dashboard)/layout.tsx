@@ -1,27 +1,31 @@
 import "@/styles/globals.css";
-import Sidebar from "@/components/dashboard/presentational/Sidebar";
-import Navbar from "@/components/dashboard/presentational/Navbar";
+import Sidebar from "@/components/dashboard/Sidebar";
 import TanstakProvider from "@/providers/TanstackProvider";
 import SessionProvider from "@/providers/SessionProvider";
-import NavbarContainer from "@/components/dashboard/containers/NavbarContainer";
+import NextUIProviderWrapper from "@/providers/NextUIProviderWrapper";
+import Navbar from "@/components/dashboard/Navbar";
 
 interface IDashboardLayout {
   children: React.ReactNode;
 }
 const DashboardLayout = function ({ children }: IDashboardLayout) {
   return (
-    <html className="h-full bg-white">
-      <body className="h-full font-interRegular">
+    <html className="h-full bg-slate-100">
+      <body className="h-full  font-interRegular">
         <TanstakProvider>
           <Sidebar />
-          <SessionProvider>
-            <NavbarContainer />
-            <div className="lg:pl-72 pt-16">
-              <main className="py-10">
-                <div className="px-4 sm:px-6 lg:px-8">{children}</div>
-              </main>
-            </div>
-          </SessionProvider>
+          <NextUIProviderWrapper>
+            <SessionProvider>
+              <Navbar />
+              <div className="lg:pl-72 pt-4">
+                <main className="py-5">
+                  <div className="container mx-auto text-zinc-800  text-16  ">
+                    {children}
+                  </div>
+                </main>
+              </div>
+            </SessionProvider>
+          </NextUIProviderWrapper>
         </TanstakProvider>
       </body>
     </html>

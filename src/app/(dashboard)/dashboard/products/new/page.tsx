@@ -1,7 +1,13 @@
-import AddProductContainer from "@/components/dashboard/containers/AddProductContainer";
+import BreadcrumbUI from "@/components/dashboard/BreadcrumbUI";
+import StepperUI from "@/components/dashboard/Stepper";
 
 const AddProductPage = function () {
-  return <AddProductContainer />;
+  return (
+    <>
+      <BreadcrumbUI />
+      <StepperUI />
+    </>
+  );
 };
 
 export default AddProductPage;

@@ -1,8 +1,7 @@
-import ProductsContainer from "@/components/dashboard/containers/ProductsContainer";
-import TableUI from "@/components/dashboard/presentational/Table";
+import Products from "@/components/dashboard/Products";
 
 const ProductsPage = function () {
-  return <ProductsContainer />;
+  return <Products />;
 };
 
 export default ProductsPage;
