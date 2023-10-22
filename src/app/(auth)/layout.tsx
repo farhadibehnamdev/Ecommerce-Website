@@ -1,10 +1,10 @@
-import "@/app/globals.css";
-import { ReduxProvider } from "@/store/provider";
+import "@/styles/globals.css";
+import TanstakProvider from "@/providers/TanstackProvider";
 const AuthLayout = function ({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full bg-white">
       <body className="h-full mx-auto max-w-full">
-        <ReduxProvider>{children}</ReduxProvider>
+        <TanstakProvider>{children}</TanstakProvider>
       </body>
     </html>
   );

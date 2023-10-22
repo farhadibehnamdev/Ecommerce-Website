@@ -1,16 +1,17 @@
-import Navbar from "@/components/website/presentational/Navbar";
-import "@/app/globals.css";
+import "@/styles/globals.css";
 import { Footer } from "@/components/website/presentational/Footer";
 import WebsiteFeatures from "@/components/website/presentational/WebsiteFeatures";
-import { ReduxProvider } from "@/store/provider";
 import NavbarContainer from "@/components/website/containers/NavbarContainer";
+import TanstakProvider from "@/providers/TanstackProvider";
+import SessionProvider from "@/providers/SessionProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools/build/lib/devtools";
 
 export const metadata = {
   title: "Ecommerce Website",
   description: "This is the Ecommerce Website",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -18,12 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white">
-        <ReduxProvider>
-          <NavbarContainer />
-          {children}
+        <TanstakProvider>
+          <SessionProvider>
+            <NavbarContainer />
+            {children}
+          </SessionProvider>
+
           <WebsiteFeatures />
           <Footer />
-        </ReduxProvider>
+        </TanstakProvider>
       </body>
     </html>
   );
