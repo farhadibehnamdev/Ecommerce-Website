@@ -39,7 +39,7 @@ const ImageUpload = forwardRef<HTMLTableRowElement, ImageUploadProps>(
             ) : (
               <Image
                 style={{ objectFit: "contain" }}
-                src={URL.createObjectURL(file)}
+                src={file ? URL.createObjectURL(file) : ""}
                 fill
                 alt={name}
               />
