@@ -26,7 +26,6 @@ export async function middleware(request: NextRequest) {
   const isPublicPath =
     path === "/auth/login" || path === "/auth/register" || path === "/";
   const token = request.cookies.get("access_token")?.value || "";
-
   if (isPublicPath && token && path !== "/") {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
@@ -44,5 +43,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/auth/login", "/auth/register", "/dashboard"],
+  matcher: ["/", "/auth/login", "/auth/register", "/dashboard/:path*"],
 };
