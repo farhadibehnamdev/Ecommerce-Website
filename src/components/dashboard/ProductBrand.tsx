@@ -10,6 +10,9 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 
+import { UseFormRegister, FieldErrors, UseFormSetValue } from "react-hook-form";
+import { AddProductFormSchemaType, IProductForm } from "./AddProduct";
+import { IAddProductFormType } from "@/types/AddProductType";
 type Person = {
   id: number;
   value: string;
@@ -40,9 +43,8 @@ const people: Person[] = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
 ];
-const ProductBrand = function () {
-  const [query, setQuery] = useState("");
 
+const ProductBrand = function ({ register, errors }: IAddProductFormType) {
   return (
     <Card className="bg-white w-full mb-4" shadow="sm" radius="sm">
       <CardHeader className="mt-2 px-4">
@@ -57,6 +59,9 @@ const ProductBrand = function () {
           className="w-full"
           placeholder="No items has been selected."
           size="md"
+          {...register("brand", { required: true })}
+          errorMessage={errors.brand && "You must select a brand"}
+          isInvalid={errors.brand ? true : false}
         >
           {people.map((curr) => (
             <SelectItem

@@ -9,7 +9,8 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-
+import { AddProductFormSchemaType, IProductForm } from "./AddProduct";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
@@ -44,7 +45,13 @@ const people: Person[] = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
 ];
-const ProductCategory = function () {
+
+interface IProductCategory {
+  register: UseFormRegister<AddProductFormSchemaType>;
+  errors: FieldErrors<AddProductFormSchemaType>;
+}
+
+const ProductCategory = function ({ register, errors }: IProductCategory) {
   const [query, setQuery] = useState("");
 
   return (
@@ -61,6 +68,9 @@ const ProductCategory = function () {
           className="w-full"
           placeholder="No items has been selected."
           size="md"
+          {...register("category", { required: true })}
+          errorMessage={errors.category && "You must select a category"}
+          isInvalid={errors.category ? true : false}
         >
           {people.map((curr) => (
             <SelectItem
