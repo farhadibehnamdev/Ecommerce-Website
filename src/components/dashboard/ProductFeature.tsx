@@ -7,10 +7,10 @@ import {
   SelectItem,
   Spacer,
   Input,
-  ListboxItem,
 } from "@nextui-org/react";
-import Image from "next/image";
-
+import { AddProductFormSchemaType } from "./AddProduct";
+import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { IAddProductFormType } from "@/types/AddProductType";
 type Color = {
   id: number;
   value: string;
@@ -35,12 +35,35 @@ const sizes: Size[] = [
   { id: 3, value: "lg" },
   { id: 4, value: "lx" },
 ];
-const ProductFeature = function () {
+interface IProductFeature extends IAddProductFormType {
+  setValue: UseFormSetValue<AddProductFormSchemaType>;
+}
+const ProductFeature = function ({
+  register,
+  setValue,
+  errors,
+}: IProductFeature) {
+  const handleSelectChange = (e: any) => {
+    const selectedOptions = e.target.value ? e.target.value.split(", ") : [];
+    if (selectedOptions.length > 0) {
+      setValue("color", selectedOptions);
+    } else {
+      setValue("color", [""]); // replace '' with a default value if necessary
+    }
+  };
+  const handleSelectSizeChange = (e: any) => {
+    const selectedOptions = e.target.value ? e.target.value.split(", ") : [];
+    if (selectedOptions.length > 0) {
+      setValue("size", selectedOptions);
+    } else {
+      setValue("size", [""]); // replace '' with a default value if necessary
+    }
+  };
   return (
     <Card className="bg-white w-full mb-4" shadow="sm" radius="sm">
       <CardHeader className="px-4 py-4">
         <h3 className="text-[22px] font-bold text-slate-600">
-          Additional Feature
+          Product Attribute
         </h3>
       </CardHeader>
       <Divider className="mb-2" />
@@ -54,11 +77,19 @@ const ProductFeature = function () {
             placeholder="No items has been selected."
             size="md"
             selectionMode="multiple"
+            {...register("color", {
+              required: true,
+              onChange(event) {
+                handleSelectChange(event);
+              },
+            })}
+            errorMessage={errors.color && "You must select a color"}
+            isInvalid={!!errors.color}
           >
             {colors.map((curr) => (
               <SelectItem
                 className="text-slate-800"
-                key={curr.value}
+                key={curr.color}
                 value={curr.color}
                 textValue={curr.color}
                 startContent={
@@ -69,6 +100,7 @@ const ProductFeature = function () {
               </SelectItem>
             ))}
           </Select>
+
           <Spacer x={3} />
           <Select
             labelPlacement="outside"
@@ -78,6 +110,14 @@ const ProductFeature = function () {
             placeholder="No items has been selected."
             size="md"
             selectionMode="multiple"
+            {...register("size", {
+              required: true,
+              onChange(event) {
+                handleSelectSizeChange(event);
+              },
+            })}
+            errorMessage={errors.size && errors.size.message}
+            isInvalid={!!errors.size}
           >
             {sizes.map((curr) => (
               <SelectItem
@@ -99,6 +139,9 @@ const ProductFeature = function () {
             placeholder="Quantity"
             labelPlacement="outside"
             size="lg"
+            {...register("quantity", { required: true, valueAsNumber: true })}
+            errorMessage={errors.quantity && errors.quantity.message}
+            isInvalid={!!errors.quantity}
           />
         </div>
       </CardBody>
