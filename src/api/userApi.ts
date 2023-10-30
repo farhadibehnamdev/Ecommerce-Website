@@ -1,7 +1,7 @@
-import { registerParams } from "@/store/thunks/authThunk/registerThunk";
-import api from "./api";
+import { LoginFormType } from "@/components/website/presentational/Login";
+import api, { axiosInstance } from "./api";
 import { URLS } from "./constants";
-import { loginParams } from "@/store/thunks/authThunk/loginThunk";
+import { RegisterFormValues } from "@/components/website/presentational/Register";
 
 export interface RegisterUserApiResponse {
   type: string;
@@ -26,6 +26,19 @@ export interface User {
   updatedAt: string;
 }
 
+export interface UserProfile {
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  address?: string;
+  phone?: string;
+  avatar: string;
+  discountCode?: string;
+  facebookId?: string;
+  googleId?: string;
+}
+
 interface Tokens {
   access: {
     token: string;
@@ -37,16 +50,33 @@ interface Tokens {
   };
 }
 
-export const registerUserApi = async function (params: registerParams) {
-  const response = await api.post<RegisterUserApiResponse>(
-    URLS.registerUser,
-    params
-  );
-  return response;
+type ErrorResponse = {
+  status: number;
+  message: string;
 };
 
-export const logingUserApi = async function (params: loginParams) {
-  return await api.post<LoginUserApiResponse>(URLS.loginUser, params);
+export const registerUserApi = async function (params: RegisterFormValues) {
+  try {
+    const response = await api.post<RegisterUserApiResponse>(
+      URLS.registerUser,
+      params
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const logingUserApi = async function (params: LoginFormType) {
+  try {
+    const response = await api.post<LoginUserApiResponse>(
+      URLS.loginUser,
+      params
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
 };
 
 export const sendVerificationEmailApi = async function (token: string) {
@@ -56,8 +86,20 @@ export const sendVerificationEmailApi = async function (token: string) {
     {
       withCredentials: true,
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     }
   );
+};
+
+export const profile = async function () {
+  return await api.get<User>("auth/profile");
+};
+
+export const userProfile = async function () {
+  try {
+    return await api.get<UserProfile>("users/me");
+  } catch (error: any) {
+    return error.response;
+  }
 };
