@@ -1,8 +1,7 @@
+"use client";
 import { useContext, useRef, useState } from "react";
-import MetaDataUI from "./MetaDataUI";
 import ProductCategory from "./ProductCategory";
 import ProductBrand from "./ProductBrand";
-import ProductVisibility from "./ProductVisibility";
 import Pricing from "./Pricing";
 import ProductTag from "./ProductTag";
 import General from "./General";
@@ -14,13 +13,10 @@ import { useForm } from "react-hook-form";
 import useAddProduct from "@/hooks/useAddProduct";
 import { StepsType } from "./Stepper";
 import { StepperContext } from "@/contexts/StepperContext";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface AddProdcutsProps {
-  steps: StepsType[];
-  setStepComplete: Function;
-}
-
-interface ProductForm {
+export interface IProductForm {
   name: string;
   description: string;
   category: string;
@@ -28,10 +24,30 @@ interface ProductForm {
   price: number;
   currency: string;
   quantity: number;
-  size: string;
-  color: string;
+  size: string[];
+  color: string[];
   tags: string[];
-  details: string;
+  // details: string;
+}
+const AddProductFormSchema = z.object({
+  name: z.string().min(1, "You must put a name for your product"),
+  description: z
+    .string()
+    .min(5, "You must write at least 5 characters.")
+    .trim(),
+  category: z.string().min(1, "You must select a category"),
+  brand: z.string().min(1, "You must select a brand"),
+  price: z.number().min(1, "You must put a valid product price"),
+  currency: z.string().min(1, "You must select a currency"),
+  quantity: z.number().min(0, "You must put a right value like 0 or more"),
+  size: z.string().array().nonempty("You must select a size"),
+  color: z.string().array().nonempty("You must select a color"),
+  tags: z.string().array().nonempty(),
+});
+export type AddProductFormSchemaType = z.infer<typeof AddProductFormSchema>;
+interface AddProdcutsProps {
+  steps: StepsType[];
+  setStepComplete: Function;
 }
 
 const AddProduct = function ({ steps, setStepComplete }: AddProdcutsProps) {
@@ -40,18 +56,28 @@ const AddProduct = function ({ steps, setStepComplete }: AddProdcutsProps) {
   if (!context)
     throw new Error("Stepper must be used within a StepperProvider");
   const { currentStep } = context;
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<AddProductFormSchemaType>({
+    resolver: zodResolver(AddProductFormSchema),
+  });
   const editorRef = useRef();
   const formRef = useRef(null);
   const onSubmit = function (data: any) {
-    const dataStep = steps.map((step) => {
-      return {
-        ...step,
-        current: step.id === currentStep ? false : true,
-        status: step.id === currentStep ? "completed" : "not",
-      };
-    });
-    setStepComplete(dataStep);
+    console.log("errors :: ", errors);
+    console.log("data :: ", data);
+    // const dataStep = steps.map((step) => {
+    //   return {
+    //     ...step,
+    //     current: step.id === currentStep ? false : true,
+    //     status: step.id === currentStep ? "completed" : "not",
+    //   };
+    // });
+    // setStepComplete(dataStep);
   };
   return (
     <>
@@ -90,18 +116,24 @@ const AddProduct = function ({ steps, setStepComplete }: AddProdcutsProps) {
             className="grid grid-cols-12 gap-6 mb-6"
           >
             <div className="col-span-12 xl:col-span-8 2xl:col-span-9">
-              <General register={register} />
-              <Pricing register={register} handleSubmit={handleSubmit} />
-              <ProductFeature />
-
-              <MetaDataUI register={register} />
+              <General control={control} register={register} errors={errors} />
+              <Pricing register={register} errors={errors} />
+              <ProductFeature
+                setValue={setValue}
+                register={register}
+                errors={errors}
+              />
+              {/* <MetaDataUI register={register} errors={errors} /> */}
             </div>
 
             <div className="col-span-12 xl:col-span-4 2xl:col-span-3">
-              <ProductVisibility />
-              <ProductCategory />
-              <ProductBrand />
-              <ProductTag />
+              <ProductCategory register={register} errors={errors} />
+              <ProductBrand register={register} errors={errors} />
+              <ProductTag
+                setValue={setValue}
+                register={register}
+                errors={errors}
+              />
             </div>
             <Button
               type="submit"
