@@ -1,21 +1,17 @@
 "use client";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { Combobox } from "@headlessui/react";
-import { useState } from "react";
 import Image from "next/image";
 import {
   Card,
   CardBody,
   CardHeader,
   Divider,
-  Input,
   Select,
   SelectItem,
 } from "@nextui-org/react";
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
+import { IAddProductFormType } from "@/types/AddProductType";
+import { useState } from "react";
+import { AddProductFormSchemaType } from "./AddProduct";
+import { UseFormSetValue } from "react-hook-form";
 
 type Person = {
   id: number;
@@ -48,10 +44,20 @@ const people: Person[] = [
   },
 ];
 
-// More users...
-const ProductTag = function () {
-  const [query, setQuery] = useState("");
+interface IProductTag extends IAddProductFormType {
+  setValue: UseFormSetValue<AddProductFormSchemaType>;
+}
 
+// More users...
+const ProductTag = function ({ register, setValue, errors }: IProductTag) {
+  const handleSelectChange = (e: any) => {
+    const selectedOptions = e.target.value ? e.target.value.split(", ") : [];
+    if (selectedOptions.length > 0) {
+      setValue("tags", selectedOptions);
+    } else {
+      setValue("tags", [""]); // replace '' with a default value if necessary
+    }
+  };
   return (
     <Card className="bg-white w-full mb-4" shadow="sm" radius="sm">
       <CardHeader className="mt-2 px-4">
@@ -66,6 +72,15 @@ const ProductTag = function () {
           className="w-full"
           placeholder="No items has been selected."
           size="md"
+          selectionMode="multiple"
+          {...register("tags", {
+            required: true,
+            onChange(event) {
+              handleSelectChange(event);
+            },
+          })}
+          errorMessage={errors.tags && errors?.tags?.message}
+          isInvalid={!!errors.tags}
         >
           {people.map((curr) => (
             <SelectItem
