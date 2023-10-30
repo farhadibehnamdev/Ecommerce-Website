@@ -1,3 +1,4 @@
+import { ZodIssue, z } from "zod";
 import api from "./api";
 import { URLS } from "./constants";
 
@@ -69,6 +70,18 @@ export interface IAddProduct {
   details: Record<string, any>;
 }
 
+export interface ImageResponseData {
+  success: boolean;
+  alt: string;
+  message: string;
+  imageUrl: string;
+}
+
+export interface IUploadMainImage {
+  id: string;
+  file: FormData;
+}
+
 export const getProductsApi = async function () {
   try {
     return await api.get<ApiReturnProduct>(URLS.getProducts);
@@ -80,6 +93,30 @@ export const getProductsApi = async function () {
 export const addProductApi = async function (data: IAddProduct) {
   try {
     return await api.post<any>(URLS.addProducts, data);
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const uploadProductMainImage = async function (
+  url: string,
+  file: FormData,
+  dispatch: any
+) {
+  try {
+    return await api.post<any>(url, file, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (progressEvent) => {
+        const percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total!
+        );
+        console.log("progressEvent ::: ", percentCompleted);
+
+        dispatch({ type: "progress", payload: percentCompleted });
+      },
+    });
   } catch (error: any) {
     return error.response;
   }
