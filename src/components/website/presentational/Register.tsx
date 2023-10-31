@@ -3,9 +3,7 @@ import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import Notification from "./Notification";
-import { ClipLoader, MoonLoader } from "react-spinners";
-import { CSSProperties } from "react";
+import { Toaster } from "react-hot-toast";
 export type RegisterFormValues = {
   firstName: string;
   lastName: string;
@@ -13,19 +11,12 @@ export type RegisterFormValues = {
   password: string;
   role: string;
 };
-const override: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "white",
+
+type registerFormProps = {
+  handleSubmitForm: Function;
 };
-const Register = function ({
-  handleSubmitForm,
-  message,
-  setShow,
-  show,
-  isFetching,
-  noticeType,
-}: any) {
+
+const Register = function ({ handleSubmitForm }: registerFormProps) {
   const {
     register,
     handleSubmit,
@@ -37,12 +28,7 @@ const Register = function ({
   return (
     <>
       <div className="flex flex-1 bg-white text-dark min-h-full">
-        <Notification
-          message={message}
-          show={show}
-          setShow={setShow}
-          noticeType={noticeType}
-        />
+        <Toaster />
         <div className="relative hidden w-0 flex-1 lg:block">
           <Image
             width={0}
@@ -166,14 +152,6 @@ const Register = function ({
                     >
                       <span className="flex justify-center items-center gap-5">
                         <span> Register</span>
-                        <ClipLoader
-                          color="white"
-                          loading={isFetching}
-                          cssOverride={override}
-                          size={20}
-                          aria-label="Loading Spinner"
-                          data-testid="loader"
-                        />
                       </span>
                     </button>
                   </div>

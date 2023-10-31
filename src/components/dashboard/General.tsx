@@ -47,7 +47,6 @@ const General = function ({ register, errors, control }: IGeneral) {
           </div>
           <div className="mb-5 rounded-lg">
             <p className="mb-2 text-base text-black">Description</p>
-            {/* <Tiptap register={register} errors={errors} /> */}
 
             <Controller
               name="description"
