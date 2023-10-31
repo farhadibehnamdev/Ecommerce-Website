@@ -1,8 +1,6 @@
 "use client";
+import { Controller, Control } from "react-hook-form";
 
-import { Editor } from "@tinymce/tinymce-react";
-import { Editor as TinyMCEEditor } from "tinymce";
-import { useRef } from "react";
 import {
   Card,
   CardBody,
@@ -11,17 +9,21 @@ import {
   Input,
   Spacer,
 } from "@nextui-org/react";
+import { UseFormRegister, FieldErrors } from "react-hook-form";
+import { AddProductFormSchemaType } from "./AddProduct";
+import Tiptap from "./TipTap";
+import TextEditor from "./TextEditor";
 
-const General = function ({ register }: any) {
-  const editorRef = useRef<TinyMCEEditor | null>(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+interface IGeneral {
+  register: UseFormRegister<AddProductFormSchemaType>;
+  errors: FieldErrors<AddProductFormSchemaType>;
+  control: Control<AddProductFormSchemaType>;
+}
+
+const General = function ({ register, errors, control }: IGeneral) {
   return (
     <>
-      <Card className="bg-white w-full " shadow="sm" radius="sm">
+      <Card className="bg-white w-full" radius="sm">
         <CardHeader className="px-4 py-4">
           <h3 className="text-[22px] font-700 text-slate-600">Basic Info</h3>
         </CardHeader>
@@ -35,39 +37,36 @@ const General = function ({ register }: any) {
               placeholder="Product Name"
               labelPlacement="outside"
               size="lg"
-              {...register("name")}
+              {...register("name", { required: true })}
+              errorMessage={errors.name && errors.name.message}
+              isInvalid={!!errors.name}
             />
             <span className="text-[12px]">
               A product name is required and recommended to be unique.
             </span>
           </div>
-          <div className="mb-5 shadow-sm rounded-lg">
+          <div className="mb-5 rounded-lg">
             <p className="mb-2 text-base text-black">Description</p>
-            <Editor
-              {...register("description")}
-              apiKey="gzzvye1m3v6mexm536ii0av310tb85vla0tkrun3m7c1y9l8"
-              onInit={(evt, editor) => (editorRef.current = editor)}
-              initialValue="<p>This is the initial content of the editor.</p>"
-              init={{
-                height: 500,
-                menubar: false,
-                // plugins: [
-                //   "advlist autolink lists link image charmap print preview anchor",
-                //   "searchreplace visualblocks code fullscreen",
-                //   "insertdatetime media table paste code help wordcount",
-                // ],
-                toolbar:
-                  "undo redo | formatselect | " +
-                  "bold italic backcolor | alignleft aligncenter " +
-                  "alignright alignjustify | bullist numlist outdent indent | " +
-                  "removeformat | help",
-                content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-              }}
+            {/* <Tiptap register={register} errors={errors} /> */}
+
+            <Controller
+              name="description"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <TextEditor onChange={onChange} value={value} errors={errors} />
+              )}
             />
+            <Spacer y={3} />
+            {errors.description && (
+              <div className="text-center flex items-center text-red-600">
+                <p>{errors?.description?.message}</p>
+              </div>
+            )}
           </div>
         </CardBody>
       </Card>
+
       <Spacer y={4} />
     </>
   );
