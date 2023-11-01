@@ -11,7 +11,6 @@ import {
 } from "@nextui-org/react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { AddProductFormSchemaType } from "./AddProduct";
-import Tiptap from "./TipTap";
 import TextEditor from "./TextEditor";
 
 interface IGeneral {

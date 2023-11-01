@@ -14,7 +14,6 @@ const Products = function () {
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong...</p>;
-  console.log("data ::", data);
   return <TableUI />;
 };
 
