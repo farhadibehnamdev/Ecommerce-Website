@@ -9,13 +9,19 @@ import {
   SelectItem,
   Spacer,
 } from "@nextui-org/react";
-
+import { AddProductFormSchemaType, IProductForm } from "./AddProduct";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 const currencyList = [
   { id: 0, label: "USD", value: "USD" },
   { id: 1, label: "EUR", value: "EUR" },
 ];
 
-const Pricing = function ({ register }: any) {
+interface IPricing {
+  register: UseFormRegister<AddProductFormSchemaType>;
+  errors: FieldErrors<AddProductFormSchemaType>;
+}
+
+const Pricing = function ({ register, errors }: IPricing) {
   return (
     <Card className="bg-white w-full mb-4" shadow="sm" radius="sm">
       <CardHeader className="px-4 py-4">
@@ -28,11 +34,13 @@ const Pricing = function ({ register }: any) {
             type="text"
             variant="bordered"
             label="Price"
-            placeholder="Product Name"
+            placeholder="Price"
             labelPlacement="outside"
             size="lg"
-            {...register("metaTitle")}
             className="w-full"
+            {...register("price", { required: true, valueAsNumber: true })}
+            errorMessage={errors.price && errors.price.message}
+            isInvalid={!!errors.price}
           />
           <Spacer x={3} />
           <Select
@@ -42,6 +50,9 @@ const Pricing = function ({ register }: any) {
             className="w-full"
             placeholder="Select an currency"
             size="lg"
+            {...register("currency", { required: true })}
+            errorMessage={errors.currency && "You must select a currency"}
+            isInvalid={errors.currency ? true : false}
           >
             {currencyList.map((curr) => (
               <SelectItem
