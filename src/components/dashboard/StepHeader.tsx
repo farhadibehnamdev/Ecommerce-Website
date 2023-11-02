@@ -7,10 +7,10 @@ interface StepHeaderProps {
 
 export const StepHeader = function ({ steps }: StepHeaderProps) {
   return (
-    <div className="grid grid-cols-12 md:mx-5">
+    <div className="max-w-full md:mx-5">
       <nav
         aria-label="Progress"
-        className=" bg-white shadow-sm col-span-12 2xl:col-span-11 rounded-md mb-12"
+        className=" bg-white shadow-sm  w-full rounded-md mb-12"
       >
         <ol
           role="list"
