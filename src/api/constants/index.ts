@@ -3,4 +3,5 @@ export const URLS = {
   sendVerificationEmail: "auth/send-verification-email",
   loginUser: "auth/login",
   getProducts: "products",
+  addProducts: "products",
 };
