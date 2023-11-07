@@ -6,39 +6,33 @@ import { User, profile } from "@/api/userApi";
 const fetchUser = async function () {
   const response = await profile();
   if (response.status >= 400) throw new Error(response.statusText);
-  if (response.status === 200) return response.data;
+  if (response.status === 200) return response.data.user;
 };
-
 const SessionProvider = function ({ children }: { children: React.ReactNode }) {
-  const {
-    isLoading,
-    data,
-    error,
-    isFetching,
-    refetch,
-  } = useQuery(["user"], fetchUser, {
-    retry: (failureCount: number, error: any) => {
-      if (error.response?.status === 401) {
-        return false;
-      } else if (error.response?.status >= 500 && failureCount > 1) {
-        return false;
-      }
-      return true;
-    },
-    refetchOnWindowFocus: false,
-  });
+  const { isLoading, data, error, isFetching, refetch, status } = useQuery(
+    ["user"],
+    fetchUser,
+    {
+      retry: (failureCount: number, error: any) => {
+        if (error.response?.status === 401) {
+          return false;
+        } else if (error.response?.status >= 500 && failureCount > 1) {
+          return false;
+        }
+        return true;
+      },
+      refetchOnWindowFocus: false,
+    }
+  );
 
-
-
-  
- 
   return (
     <SessionContext.Provider
       value={{
-        user:data?.user,
+        user: data,
         isLoading,
         refetch,
         isFetching,
+        status,
       }}
     >
       {children}
@@ -47,4 +41,3 @@ const SessionProvider = function ({ children }: { children: React.ReactNode }) {
 };
 
 export default SessionProvider;
-

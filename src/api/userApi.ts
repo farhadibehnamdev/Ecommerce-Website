@@ -26,6 +26,13 @@ export interface User {
   updatedAt: string;
 }
 
+export interface ResponseUserApi {
+  message: string;
+  statusCode: number;
+  type: string;
+  user: User;
+}
+
 export interface UserProfile {
   firstName: string;
   lastName: string;
@@ -93,7 +100,7 @@ export const sendVerificationEmailApi = async function (token: string) {
 };
 
 export const profile = async function () {
-  return await api.get<User>("auth/profile");
+  return await api.get<ResponseUserApi>("auth/profile");
 };
 
 export const userProfile = async function () {
