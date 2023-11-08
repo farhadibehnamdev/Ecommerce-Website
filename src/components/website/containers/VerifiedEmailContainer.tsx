@@ -5,24 +5,37 @@ import { useEffect, useState } from "react";
 
 const VerifiedEmailContainer = function ({ token }: { token: string }) {
   const [message, setMessage] = useState("");
-  const confirmEmail = async function () {
-    const resposne = await api.get<string>("auth/verify-email", {
-      params: { token },
-    });
-    if (resposne.status === 200) {
-      setMessage("Email has been verified");
-    } else {
-      setMessage("Something went wrong...");
-    }
-  };
+  const [isFailed, setIsFailed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    try {
-      confirmEmail();
-    } catch (error: any) {
-      setMessage("Something went wrong...");
-    }
+    const confirmEmail = async function () {
+      try {
+        const resposne = await api.get<any>("auth/verify-email", {
+          params: { token },
+        });
+
+        if (resposne.status === 200) {
+          setIsLoading(false);
+
+          setMessage("Email has been verified");
+          setIsFailed(false);
+        }
+      } catch (error: any) {
+        setIsLoading(false);
+        setMessage(error.response.data.message);
+        setIsFailed(true);
+      }
+    };
+    confirmEmail();
   }, []);
-  return <VerifiedEmail message={message} />;
+  return (
+    <VerifiedEmail
+      message={message}
+      isFailed={isFailed}
+      isLoading={isLoading}
+    />
+  );
 };
 
 export default VerifiedEmailContainer;
