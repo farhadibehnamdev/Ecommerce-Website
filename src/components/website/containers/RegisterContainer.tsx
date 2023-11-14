@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { VscError } from "react-icons/vsc";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const registerUser = async function (data: RegisterFormValues) {
   data.role = "Admin";
@@ -19,36 +20,20 @@ const registerUser = async function (data: RegisterFormValues) {
 };
 
 const RegisterContainer = function () {
-  const registerMutation = useMutation(registerUser);
+  const registerMutation = useMutation({ mutationFn: registerUser });
   const router = useRouter();
-  const toast = useCustomToast();
-
   const handleSubmitForm = (data: RegisterFormValues) => {
-    registerMutation.mutate(data);
+    const toastId = toast.loading("Processing...");
+    registerMutation.mutate(data, {
+      onSuccess(data, variables, context) {
+        toast.success("Thank you for signing up", { id: toastId });
+        router.push("/auth/verify-email");
+      },
+      onError(error, variables, context) {
+        toast.error(error.message, { id: toastId });
+      },
+    });
   };
-
-  useEffect(() => {
-    if (registerMutation.isLoading) {
-      toast("Loading...", null, "loading");
-    } else if (registerMutation.isSuccess) {
-      toast(
-        "Thank you for signing up",
-        <BsFillCheckCircleFill className="w-4 h-4 text-black" />
-      );
-
-      router.push(`/auth/verify-email`);
-    } else if (registerMutation.isError) {
-      toast(
-        registerMutation.error as string,
-        <VscError className="w-4 h-4 text-black" />
-      );
-    }
-  }, [
-    registerMutation.isLoading,
-    registerMutation.data,
-    registerMutation.isError,
-    registerMutation.isSuccess,
-  ]);
 
   return <Register handleSubmitForm={handleSubmitForm} />;
 };
