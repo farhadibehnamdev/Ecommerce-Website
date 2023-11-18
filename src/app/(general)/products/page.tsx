@@ -1,4 +1,4 @@
-import Products from "@/components/presentational/Products";
+import Products from "@/components/website/Products";
 
 const ProductsPage = function () {
   return <Products />;

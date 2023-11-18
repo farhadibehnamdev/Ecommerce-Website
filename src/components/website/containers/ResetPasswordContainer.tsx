@@ -2,7 +2,7 @@
 import api from "@/api/api";
 import ResetPassword, {
   ResetPasswordFormDataType,
-} from "@/components/website/presentational/ResetPassword";
+} from "@/components/website/ResetPassword";
 import useNotification from "@/hooks/useNotification";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

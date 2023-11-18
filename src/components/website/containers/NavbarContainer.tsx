@@ -1,6 +1,6 @@
 "use client";
 import api from "@/api/api";
-import Navbar from "@/components/website/presentational/Navbar";
+import Navbar from "@/components/website/Navbar";
 import SessionContext, { ISessionContext } from "@/contexts/SessionContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { useContext, useReducer, useState } from "react";

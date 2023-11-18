@@ -1,4 +1,4 @@
-import ProductDetails from "@/components/website/presentational/ProductDetails";
+import ProductDetails from "@/components/website/ProductDetails";
 
 const ProductPage = function ({ params }: any) {
   console.log(params);

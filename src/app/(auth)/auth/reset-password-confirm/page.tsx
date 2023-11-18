@@ -1,4 +1,4 @@
-import ResetPasswordConfirm from "@/components/website/presentational/ResetPasswordConfirm";
+import ResetPasswordConfirm from "@/components/website/ResetPasswordConfirm";
 
 const ResetPasswordConfirmPage = function () {
   return <ResetPasswordConfirm />;

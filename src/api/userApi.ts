@@ -1,7 +1,7 @@
-import { LoginFormType } from "@/components/website/presentational/Login";
+import { LoginFormType } from "@/components/website/Login";
 import api, { axiosInstance } from "./api";
 import { URLS } from "./constants";
-import { RegisterFormValues } from "@/components/website/presentational/Register";
+import { RegisterFormValues } from "@/components/website/Register";
 
 export interface RegisterUserApiResponse {
   type: string;

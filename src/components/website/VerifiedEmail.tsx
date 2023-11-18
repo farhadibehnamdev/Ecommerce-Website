@@ -3,7 +3,6 @@ import { AiOutlineHome } from "react-icons/ai";
 import { GiConfirmed } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 import { TbFaceIdError } from "react-icons/tb";
-import ContentLoader from "react-content-loader";
 import Link from "next/link";
 type VerifiedEmailProps = {
   message: string;

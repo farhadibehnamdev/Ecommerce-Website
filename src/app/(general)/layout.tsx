@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
-import { Footer } from "@/components/website/presentational/Footer";
-import WebsiteFeatures from "@/components/website/presentational/WebsiteFeatures";
+import { Footer } from "@/components/website/Footer";
+import WebsiteFeatures from "@/components/website/WebsiteFeatures";
 import NavbarContainer from "@/components/website/containers/NavbarContainer";
 import TanstakProvider from "@/providers/TanstackProvider";
 import SessionProvider from "@/providers/SessionProvider";

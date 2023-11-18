@@ -14,14 +14,14 @@ const Dashboard = function () {
         <CardUI bgColor="bg-sky-100" title="New Customers" data="1,156k" />
         <CardUI bgColor="bg-slate-200" title="Pending Orders" data="239k" />
       </div>
-      <div className="flex justify-center gap-7">
+      {/* <div className="flex justify-center gap-7">
         <div className="flex p-4 justify-center shadow-sm bg-slate-50 rounded-2xl">
           <ChartUI />
         </div>
         <div className="bg-slate-50 shadow-sm p-4 flex justify-center rounded-2xl">
           <PieChartUI />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
