@@ -1,24 +1,9 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { registerSelector } from "@/store/slices/auth/registerSlice";
-import SendVerificationEmail from "@/components/website/presentational/SendVerificationEmail";
-import { sendVerificationEmailThunk } from "@/store/thunks/authThunk/sendVerificationEmailThunk";
-import { sendVerificationEmailSelector } from "@/store/slices/auth/sendVerificationSlice";
+import { useEffect } from "react";
+import { sendVerificationEmailApi } from "@/api/userApi";
+import SendVerificationEmail from "../SendVerificationEmail";
 
 const SendVerificationEmailContainer = function () {
-  const dispatch = useAppDispatch();
-  const { data } = useAppSelector(registerSelector);
-  const { token } = useAppSelector(sendVerificationEmailSelector);
-  const handleSubmitVerification = function () {
-    if (data?.tokens?.access?.token && !data.emailVerificationToken)
-      dispatch(sendVerificationEmailThunk(data?.tokens?.access?.token));
-  };
-
-  return (
-    <SendVerificationEmail
-      handleSubmitVerification={handleSubmitVerification}
-      emailVerificationToken={data?.emailVerificationToken || token}
-    />
-  );
+  return <SendVerificationEmail />;
 };
 export default SendVerificationEmailContainer;
