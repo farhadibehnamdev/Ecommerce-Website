@@ -1,6 +1,8 @@
+import { uploadProductMainImage } from "@/api/productApi";
 import axios from "axios";
 import { useEffect, useReducer, useRef } from "react";
 import toast from "react-hot-toast";
+import Cookies from "universal-cookie";
 
 interface State<T> {
   data?: T;
@@ -17,10 +19,10 @@ type Action<T> =
 type Options = {
   disabled: boolean | undefined;
 };
-
+const cookie = new Cookies();
 export const useUploadFile = <T = unknown>(
   url: string,
-  resourceUrl: string,
+  file: File,
   options: Options
 ) => {
   const { disabled } = options;
@@ -47,36 +49,24 @@ export const useUploadFile = <T = unknown>(
         return state;
     }
   };
+  const formData = new FormData();
 
   const [state, dispatch] = useReducer(fetchReducer, initialState);
-
   useEffect(() => {
     if (!url || disabled) return;
-
     cancelRequest.current = false;
-
     const fetchData = async () => {
       dispatch({ type: "loading" });
-
+      formData.append("file", file);
       try {
-        const res = await axios.post(url, resourceUrl, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          onUploadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total!
-            );
-            dispatch({ type: "progress", payload: percentCompleted });
-            toast("Something went wrong");
-          },
-        });
+        const res = await uploadProductMainImage(url, formData, dispatch);
         const data = res.data as T;
         if (cancelRequest.current) return;
         dispatch({ type: "fetched", payload: data });
       } catch (error) {
         if (cancelRequest.current) return;
         dispatch({ type: "error", payload: true });
+        toast("Something went wrong");
       }
     };
     void fetchData();
