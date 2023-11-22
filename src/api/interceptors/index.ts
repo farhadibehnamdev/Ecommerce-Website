@@ -1,7 +1,5 @@
 import { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { axiosInstance } from "../api";
-import Cookies from "universal-cookie";
-const cookie = new Cookies();
 export const refreshToken = async () => {
   try {
     const response = await axiosInstance.post("auth/generate/tokens");
