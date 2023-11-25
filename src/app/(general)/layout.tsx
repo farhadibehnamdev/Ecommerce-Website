@@ -1,10 +1,9 @@
 import "@/styles/globals.css";
 import { Footer } from "@/components/website/Footer";
 import WebsiteFeatures from "@/components/website/WebsiteFeatures";
-import NavbarContainer from "@/components/website/containers/NavbarContainer";
 import TanstakProvider from "@/providers/TanstackProvider";
 import SessionProvider from "@/providers/SessionProvider";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools/build/lib/devtools";
+import NavbarUI from "@/components/website/NavbarUI";
 
 export const metadata = {
   title: "Ecommerce Website",
@@ -21,7 +20,7 @@ export default async function RootLayout({
       <body className="bg-white">
         <TanstakProvider>
           <SessionProvider>
-            <NavbarContainer />
+            <NavbarUI />
             {children}
           </SessionProvider>
 
