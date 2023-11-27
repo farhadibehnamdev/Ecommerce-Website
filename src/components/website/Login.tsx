@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { CSSProperties } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster } from "react-hot-toast";
 import useLogin from "@/hooks/useLogin";
@@ -18,8 +17,8 @@ const Login = function () {
     formState: { errors },
   } = useForm<LoginFormType>();
   const { loginMutation } = useLogin();
-  const onSubmit = async function (data: LoginFormType) {
-    await loginMutation.mutateAsync(data);
+  const onSubmit = function (data: LoginFormType) {
+    loginMutation.mutate(data);
   };
   return (
     <div className="flex flex-1 bg-white min-h-full">
