@@ -74,7 +74,7 @@ export const registerUserApi = async function (params: RegisterFormValues) {
   }
 };
 
-export const logingUserApi = async function (params: LoginFormType) {
+export const loginUserApi = async function (params: LoginFormType) {
   try {
     const response = await api.post<LoginUserApiResponse>(
       URLS.loginUser,
