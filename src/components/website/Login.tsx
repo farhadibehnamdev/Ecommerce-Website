@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { Toaster } from "react-hot-toast";
-import useLogin from "@/hooks/useLogin";
+import useLogin from "@/hooks/auth/useLogin";
 export type LoginFormType = {
   email: string;
   password: string;
