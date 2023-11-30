@@ -3,9 +3,8 @@ import { nextui } from "@nextui-org/react";
 const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{tsx,jsx}",
+    "./src/app/**/*.{ts,tsx,jsx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
 
@@ -63,7 +62,6 @@ module.exports = {
       height: {
         "70px": "70px",
       },
-
       colors: {
         primary: {
           100: "#A29FA9",
