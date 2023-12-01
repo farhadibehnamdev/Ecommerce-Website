@@ -7,19 +7,16 @@ import {
   CursorArrowRaysIcon,
   DocumentChartBarIcon,
   FingerPrintIcon,
-  MagnifyingGlassIcon,
   SquaresPlusIcon,
 } from "@heroicons/react/20/solid";
-import { Fragment, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import api from "@/api/api";
-import { User } from "@/api/userApi";
 import { useQueryClient } from "@tanstack/react-query";
 import SessionContext, { ISessionContext } from "@/contexts/SessionContext";
 import {
   Avatar,
   Button,
-  Divider,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -31,17 +28,7 @@ import {
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
-import {
-  Activity,
-  CherryIcon,
-  Divide,
-  Flashlight,
-  HeartIcon,
-  Scale,
-  SearchIcon,
-  Server,
-  ShoppingBagIcon,
-} from "lucide-react";
+import { HeartIcon, SearchIcon, ShoppingBagIcon } from "lucide-react";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -198,7 +185,7 @@ const NavbarUI = function () {
           </NavbarItem>
           <NavbarItem className="hidden lg:flex">
             {user ? (
-              <Dropdown placement="bottom-end">
+              <Dropdown placement="bottom-end" className="text-zinc-800">
                 <DropdownTrigger>
                   <Avatar
                     isBordered
@@ -212,18 +199,10 @@ const NavbarUI = function () {
                 </DropdownTrigger>
                 <DropdownMenu aria-label="Profile Actions" variant="flat">
                   <DropdownItem key="profile" className="h-14 gap-2">
-                    <p className="font-semibold">Signed in as</p>
-                    <p className="font-semibold">zoey@example.com</p>
-                  </DropdownItem>
-                  <DropdownItem key="settings">My Settings</DropdownItem>
-                  <DropdownItem key="team_settings">Team Settings</DropdownItem>
-                  <DropdownItem key="analytics">Analytics</DropdownItem>
-                  <DropdownItem key="system">System</DropdownItem>
-                  <DropdownItem key="configurations">
-                    Configurations
-                  </DropdownItem>
-                  <DropdownItem key="help_and_feedback">
-                    Help & Feedback
+                    <p className="font-semibold">
+                      {user.firstName} {user.lastName}
+                    </p>
+                    <p className="font-semibold">{user.email}</p>
                   </DropdownItem>
                   <DropdownItem key="logout" color="danger">
                     Log Out
