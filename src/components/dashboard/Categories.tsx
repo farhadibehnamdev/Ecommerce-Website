@@ -10,13 +10,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
-import {
-  Delete,
-  Edit,
-  Eye,
-  MoreVertical,
-  RemoveFormatting,
-} from "lucide-react";
+import { Delete, Edit, Eye, MoreVertical } from "lucide-react";
 interface ICategory {
   uid: string;
   name: string;
