@@ -1,6 +1,12 @@
-import { Popover, Transition } from "@headlessui/react";
-import { ShoppingBagIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
+import {
+  Image,
+  Button,
+  Divider,
+  DropdownItem,
+  DropdownSection,
+  DropdownMenu,
+} from "@nextui-org/react";
+import { Trash2Icon } from "lucide-react";
 import { Fragment } from "react";
 import { Trash } from "react-huge-icons/outline";
 
@@ -44,110 +50,109 @@ const products = [
 ];
 export const ShoppingCart = function () {
   return (
-    <Popover className="flow-root relative ">
-      <Popover.Button className="group -m-2 flex items-center p-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-        >
-          <path
-            stroke="#131118"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-            d="M9 6v1a3 3 0 1 0 6 0V6"
-          />
-          <path
-            stroke="#131118"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-            d="M15.612 3H8.389a4 4 0 0 0-3.946 3.342l-1.667 10A4 4 0 0 0 6.722 21h10.556a4 4 0 0 0 3.946-4.658l-1.667-10A4 4 0 0 0 15.612 3Z"
-          />
-        </svg>
-        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-          0
-        </span>
-        <span className="sr-only">items in cart, view bag</span>
-      </Popover.Button>
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-200"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition ease-in duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
+    <DropdownMenu
+      className="w-fit"
+      aria-label="Profile Actions"
+      variant="flat"
+      itemClasses={{
+        base: [
+          "p-4",
+          "data-[hover=true]:bg-white",
+          "cursor:none",
+          "rounded-none",
+          "mb-4",
+        ],
+      }}
+    >
+      <DropdownItem className="ml-1">
+        <h1 className="text-zinc-900 text-16">You have 3 items in your cart</h1>
+      </DropdownItem>
+      <DropdownSection
+        className="mb-2"
+        classNames={{
+          base: [""],
+        }}
       >
-        <Popover.Panel
-          className={`absolute top-10 bg-white z-50 shadow-lg p-5 xs:mx-auto  xs:-right-[50%] xs:translate-x-[23%]  sm:-right-10 -mr-2 mt-3 w-fit ring-1 lg:ring-black ring-opacity-5`}
-        >
-          <form className="mx-auto max-w-2xl">
-            <p className="text-dark font-jostBodyRegular font-400 leading-23 text-16 mb-7">
-              You have 3 items in your cart
-            </p>
-            <ul role="list" className="divide-y divide-grayOpacity">
-              {products.map((product: any, index) => (
-                <li
-                  key={product.id}
-                  className={`flex items-start ${
-                    index === 0 ? "pb-5" : "py-5"
-                  }`}
-                >
-                  <div className="flex items-center w-70px h-70px  bg-grayOpacity  justify-center">
-                    <Image
-                      width={51}
-                      height={46}
-                      src={product.imageSrc}
-                      alt={product.imageAlt}
-                      className="flex-none p-2"
-                    />
-                  </div>
-                  <div className={`ml-2.5 flex-auto`}>
-                    <h3 className="text-dark font-jostBodyRegular text-14 font-400">
-                      <a href={product.href}>{product.name}</a>
-                    </h3>
-                    <h3 className="text-dark font-jostBodyBold text-14 font-700 ">
-                      <a href={product.href}>
-                        {product.count} x ${product.price}.00
-                      </a>
-                    </h3>
-                    <h3 className="text-dark font-jostBodyRegular font-400 text-14">
-                      <div className="flex justify-between">
-                        <a href={product.href}>Size: {product.size}</a>
-                        <Trash className="w-5 h-5 text-red-400" />
-                      </div>
-                    </h3>
-                  </div>
-                </li>
-              ))}
-              <div className="flex justify-between py-5">
-                <span className="text-16 text-dark font-jostBodyBold font-700 leading-23">
-                  Subtotal
-                </span>
-                <span className="text-16 text-dark font-jostBodyBold font-700 leading-23">
-                  $200.00
-                </span>
-              </div>
-            </ul>
-
-            <button
-              type="submit"
-              className="w-full rounded-10 border mb-2.5 bg-white border-dark pl-24 pr-24 pt-16.5px pb-16.5px  font-jostBodyRegular text-14 font-400 text-dark"
-            >
-              View Cart
-            </button>
-
-            <button
-              type="submit"
-              className="w-full rounded-10 bg-dark pl-122.5px pr-122.5px pt-16.5px pb-16.5px  font-jostBodyRegular text-14 font-400 text-white"
-            >
-              Checkout
-            </button>
-          </form>
-        </Popover.Panel>
-      </Transition>
-    </Popover>
+        <DropdownItem key="item1" className="h-14  mb-8 outline-none">
+          <div className="flex justify-center items-center gap-4 p-2">
+            <div className="">
+              <Image
+                radius="sm"
+                alt="image cart"
+                className="w-[60px] h-[60px]"
+                src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+              />
+            </div>
+            <div className="flex flex-col text-zinc-800 gap-1">
+              <p className="font-semibold">Girls Pink Moana Printed Dress</p>
+              <p className="font-bold">1 x $80.00</p>
+              <p className="font-medium"> Size: S</p>
+            </div>
+            <div className="flex justify-end items-end">
+              <Trash2Icon className="w-4 h-4 text-red-400" />
+            </div>
+          </div>
+          <Divider orientation="horizontal" className="bg-zinc-100" />
+        </DropdownItem>
+        <DropdownItem key="item2" className="h-14  mb-8 outline-none">
+          <div className="flex justify-center items-center gap-3 p-2">
+            <div className="">
+              <Image
+                radius="sm"
+                alt="image cart"
+                className="w-[60px] h-[60px]"
+                src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+              />
+            </div>
+            <div className="flex flex-col text-zinc-800 gap-1">
+              <p className="font-semibold">Girls Pink Moana Printed Dress</p>
+              <p className="font-bold">1 x $80.00</p>
+              <p className="font-medium"> Size: S</p>
+            </div>
+            <div className="flex justify-end items-end">
+              <Trash2Icon className="w-4 h-4 text-red-400" />
+            </div>
+          </div>
+          <Divider orientation="horizontal" className="bg-zinc-100" />
+        </DropdownItem>
+        <DropdownItem key="item2" className="h-14 mb-8">
+          <div className="flex justify-center items-center gap-3 p-3">
+            <div className="">
+              <Image
+                radius="sm"
+                alt="image cart"
+                className="w-[60px] h-[60px]"
+                src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+              />
+            </div>
+            <div className="flex flex-col text-zinc-800 gap-1">
+              <p className="font-semibold">Girls Pink Moana Printed Dress</p>
+              <p className="font-bold">1 x $80.00</p>
+              <p className="font-medium"> Size: S</p>
+            </div>
+            <div className="flex justify-end items-end">
+              <Trash2Icon className="w-4 h-4 text-red-400" />
+            </div>
+          </div>
+          <Divider orientation="horizontal" className="bg-zinc-100" />
+        </DropdownItem>
+      </DropdownSection>
+      <DropdownItem key="subtotal">
+        <div className="flex justify-between mx-2">
+          <span className="font-bold text-16">Subtotal</span>
+          <span className="font-bold text-16">$200.00</span>
+        </div>
+      </DropdownItem>
+      <DropdownItem className="flex w-full flex-col justify-center items-center">
+        <Button variant="bordered" radius="sm" size="lg">
+          View Cart
+        </Button>
+      </DropdownItem>
+      <DropdownItem className="flex flex-col justify-center items-center">
+        <Button radius="sm" className="bg-zinc-800 text-white" size="lg">
+          Checkout
+        </Button>
+      </DropdownItem>
+    </DropdownMenu>
   );
 };

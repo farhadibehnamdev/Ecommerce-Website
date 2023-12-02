@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { useContext, useState } from "react";
 import {
   ArrowPathIcon,
   ChartPieIcon,
@@ -9,7 +9,6 @@ import {
   FingerPrintIcon,
   SquaresPlusIcon,
 } from "@heroicons/react/20/solid";
-import { useContext, useState } from "react";
 import Link from "next/link";
 import api from "@/api/api";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,18 +16,27 @@ import SessionContext, { ISessionContext } from "@/contexts/SessionContext";
 import {
   Avatar,
   Button,
+  Divider,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
+  Image,
   Input,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  Spacer,
 } from "@nextui-org/react";
-import { HeartIcon, SearchIcon, ShoppingBagIcon } from "lucide-react";
+import {
+  HeartIcon,
+  SearchIcon,
+  ShoppingBagIcon,
+  Trash2Icon,
+} from "lucide-react";
+import { ShoppingCart } from "./ShoppingCart";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -165,7 +173,7 @@ const NavbarUI = function () {
             <NavbarItem>Contact Us</NavbarItem>
           </NavbarContent>
         </NavbarContent>
-        <NavbarContent justify="end" className="text-zinc-600">
+        <NavbarContent justify="end" className="text-zinc-600 ">
           <NavbarItem className="flex justify-center items-center gap-3">
             <Input
               classNames={{
@@ -181,9 +189,21 @@ const NavbarUI = function () {
               type="search"
             />
             <HeartIcon className="w-6 h-6" />
-            <ShoppingBagIcon className="w-6 h-6" />
+            <NavbarItem className="hidden lg:flex">
+              <Dropdown
+                backdrop="blur"
+                radius="sm"
+                placement="bottom-end"
+                className="text-zinc-800 mt-2"
+              >
+                <DropdownTrigger>
+                  <ShoppingBagIcon className="w-6 h-6" />
+                </DropdownTrigger>
+                <ShoppingCart />
+              </Dropdown>
+            </NavbarItem>
           </NavbarItem>
-          <NavbarItem className="hidden lg:flex">
+          <NavbarItem className="hidden lg:flex ">
             {user ? (
               <Dropdown placement="bottom-end" className="text-zinc-800">
                 <DropdownTrigger>
