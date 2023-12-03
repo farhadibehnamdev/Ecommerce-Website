@@ -55,25 +55,14 @@ export const ShoppingCart = function () {
       aria-label="Profile Actions"
       variant="flat"
       itemClasses={{
-        base: [
-          "p-4",
-          "data-[hover=true]:bg-white",
-          "cursor:none",
-          "rounded-none",
-          "mb-4",
-        ],
+        base: ["data-[hover=true]:bg-white", "cursor:none", "rounded-none"],
       }}
     >
-      <DropdownItem className="ml-1">
+      <DropdownItem className="ml-1 mb-7">
         <h1 className="text-zinc-900 text-16">You have 3 items in your cart</h1>
       </DropdownItem>
-      <DropdownSection
-        className="mb-2"
-        classNames={{
-          base: [""],
-        }}
-      >
-        <DropdownItem key="item1" className="h-14  mb-8 outline-none">
+      <DropdownSection>
+        <DropdownItem key="item1" className="h-14  mb-11 outline-none">
           <div className="flex justify-center items-center gap-4 p-2">
             <div className="">
               <Image
@@ -94,7 +83,7 @@ export const ShoppingCart = function () {
           </div>
           <Divider orientation="horizontal" className="bg-zinc-100" />
         </DropdownItem>
-        <DropdownItem key="item2" className="h-14  mb-8 outline-none">
+        <DropdownItem key="item2" className="h-14  mb-11 outline-none">
           <div className="flex justify-center items-center gap-3 p-2">
             <div className="">
               <Image
@@ -137,19 +126,19 @@ export const ShoppingCart = function () {
           <Divider orientation="horizontal" className="bg-zinc-100" />
         </DropdownItem>
       </DropdownSection>
-      <DropdownItem key="subtotal">
+      <DropdownItem key="subtotal" className="mb-5">
         <div className="flex justify-between mx-2">
           <span className="font-bold text-16">Subtotal</span>
           <span className="font-bold text-16">$200.00</span>
         </div>
       </DropdownItem>
-      <DropdownItem className="flex w-full flex-col justify-center items-center">
-        <Button variant="bordered" radius="sm" size="lg">
+      <DropdownItem>
+        <Button variant="bordered" radius="sm" size="lg" className="w-full">
           View Cart
         </Button>
       </DropdownItem>
-      <DropdownItem className="flex flex-col justify-center items-center">
-        <Button radius="sm" className="bg-zinc-800 text-white" size="lg">
+      <DropdownItem>
+        <Button radius="sm" className="bg-zinc-800 w-full text-white" size="lg">
           Checkout
         </Button>
       </DropdownItem>
