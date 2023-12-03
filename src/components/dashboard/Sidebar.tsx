@@ -3,7 +3,6 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 import Image from "next/image";
-import Navbar from "./Navbar";
 import {
   PiBrandyDuotone,
   PiChatCenteredTextDuotone,
@@ -19,7 +18,15 @@ import {
 } from "react-icons/pi";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-const navigation = [
+import { IconType } from "react-icons/lib";
+type NavigationMenu = {
+  name: string;
+  href: string;
+  icon: IconType;
+  current: boolean;
+};
+
+const navigation: NavigationMenu[] = [
   {
     name: "Dashboard",
     href: "/dashboard",
@@ -34,7 +41,7 @@ const navigation = [
   },
   {
     name: "Categories",
-    href: "/categories",
+    href: "/dashboard/categories",
     icon: PiFolderDuotone,
     current: false,
   },
@@ -42,42 +49,32 @@ const navigation = [
   { name: "Colors", href: "/colors", icon: PiPaletteDuotone, current: false },
   { name: "Size", href: "/size", icon: PiTextAaDuotone, current: false },
   {
-    id: 1,
     name: "Customers",
-    href: "/customers",
-
+    href: "/dashboard/customers",
     current: false,
     icon: PiUsersDuotone,
   },
   {
-    id: 2,
     name: "Reviews",
-    href: "/reviews",
-    initial: "T",
+    href: "/dashboard/reviews",
     current: false,
     icon: PiChatCenteredTextDuotone,
   },
   {
-    id: 3,
     name: "Orders",
-    href: "/orders",
-    initial: "W",
+    href: "/dashboard/orders",
     current: false,
     icon: PiShoppingBagOpenDuotone,
   },
   {
-    id: 4,
     name: "Favorites",
-    href: "/favorites",
-    initial: "W",
+    href: "/dashboard/favorites",
     current: false,
     icon: PiHeartDuotone,
   },
   {
-    id: 5,
     name: "Discounts",
-    href: "/discounts",
-    initial: "W",
+    href: "/dashboard/discounts",
     current: false,
     icon: PiPercentDuotone,
   },
@@ -87,7 +84,15 @@ function classNames(...classes: any) {
 }
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const [navMenu, setNavMenu] = useState<NavigationMenu[]>(navigation);
+  const activeMenuHandler = (item: NavigationMenu) => {
+    setNavMenu((items) =>
+      items.map((navLink) => ({
+        ...navLink,
+        current: item.name === navLink.name,
+      }))
+    );
+  };
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -220,8 +225,8 @@ export default function Sidebar() {
             <ul role="list" className="flex flex-1  flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
-                  {navigation.map((item) => (
-                    <li key={item.name}>
+                  {navMenu.map((item) => (
+                    <li key={item.name} onClick={() => activeMenuHandler(item)}>
                       <Link
                         href={item.href}
                         className={classNames(
@@ -246,7 +251,6 @@ export default function Sidebar() {
                   ))}
                 </ul>
               </li>
-              <li></li>
               {/* <li className="mt-auto">
                 <a
                   href="#"
