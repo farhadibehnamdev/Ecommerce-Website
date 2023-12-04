@@ -9,11 +9,8 @@ const cookies = new Cookies();
 
 const userLogin = async function (data: LoginFormType) {
   const response = await loginUserApi(data);
-  console.log("response.data :: ", response.data);
   if (response.status >= 400) throw new Error(response.statusText);
   if (response.status === 201) {
-    console.log("response.data :: ", response.data);
-    alert("stop");
     cookies.set("access_token", response.data.tokens?.access.token, {
       path: "/",
       expires: new Date(response.data.tokens?.access.expires),
