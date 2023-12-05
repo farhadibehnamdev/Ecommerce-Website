@@ -23,7 +23,6 @@ export default async function RootLayout({
             <NavbarUI />
             {children}
           </SessionProvider>
-
           <WebsiteFeatures />
           <Footer />
         </TanstakProvider>

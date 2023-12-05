@@ -10,7 +10,7 @@ interface IDashboardLayout {
 }
 const DashboardLayout = function ({ children }: IDashboardLayout) {
   return (
-    <html className="h-full bg-slate-100">
+    <html className="h-full bg-slate-50">
       <body className="h-full  font-interRegular">
         <TanstakProvider>
           <Sidebar />
