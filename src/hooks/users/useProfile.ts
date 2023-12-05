@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 const getProfile = async function () {
   const response = await userProfile();
   if (response.status >= 400) throw new Error(response.statusText);
-  if (response.status === 201) {
+  if (response.status === 200) {
     return response.data;
   }
 };
