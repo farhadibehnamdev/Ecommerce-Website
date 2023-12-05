@@ -5,7 +5,6 @@ export interface IAddCategory {
   code: string;
   name: string;
   description: string;
-  image: string;
 }
 
 interface ResponseAddCategoryApi extends IAddCategory {}

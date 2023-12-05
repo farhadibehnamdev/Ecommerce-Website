@@ -10,26 +10,30 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import BreadcrumbUI from "./BreadcrumbUI";
+import useAddCategory from "@/hooks/categories/useAddCategory";
 
 type AddCategoryType = {
+  code: string;
   name: string;
   description: string;
 };
 
 const AddCategorySchema = z.object({
-  name: z.string().min(1, "Please fill in the name field."),
+  code: z.string().min(3, "Please fill in the code field."),
+  name: z.string().min(3, "Please fill in the name field."),
   description: z.string(),
 });
 
 export type AddCategorySchemaType = z.infer<typeof AddCategorySchema>;
 const AddCategory = function () {
+  const { addCategoryMutation } = useAddCategory();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<AddCategoryType>();
   const onSubmit = function (data: AddCategorySchemaType) {
-    console.log("data ::: ", data);
+    addCategoryMutation.mutate(data);
   };
   return (
     <div className="w-full">
@@ -46,6 +50,22 @@ const AddCategory = function () {
           <div>
             <Card>
               <CardBody className="w-full p-5">
+                <div className="col-span-12 xl:col-span-8 2xl:col-span-9">
+                  <Input
+                    type="text"
+                    label="Code"
+                    placeholder="abc"
+                    labelPlacement="outside"
+                    variant="bordered"
+                    className="max-w-full bg-white"
+                    size="lg"
+                    {...register("code", { required: true })}
+                    errorMessage={errors.code && errors.code.message}
+                    isInvalid={!!errors.code}
+                  />
+                </div>
+                <Spacer y={4} />
+
                 <div className="col-span-12 xl:col-span-8 2xl:col-span-9">
                   <Input
                     type="text"
@@ -73,6 +93,7 @@ const AddCategory = function () {
                       base: "w-full",
                       input: "resize-y min-h-[40px]",
                     }}
+                    {...register("description", { required: false })}
                   />
                 </div>
               </CardBody>
@@ -86,6 +107,14 @@ const AddCategory = function () {
               size="lg"
             >
               Publish
+            </Button>
+            <Button
+              variant="bordered"
+              className="bg-white py-2 mr-2 px-10"
+              radius="sm"
+              size="lg"
+            >
+              Cancel
             </Button>
           </div>
         </form>
