@@ -4,4 +4,5 @@ export const URLS = {
   loginUser: "auth/login",
   getProducts: "products",
   addProducts: "products",
+  addCategory: "categories",
 };
