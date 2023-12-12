@@ -10,7 +10,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import { Button } from "@nextui-org/react";
 import ProductFeature from "./ProductFeature";
 import { useForm } from "react-hook-form";
-import useAddProduct from "@/hooks/useAddProduct";
+import useAddProduct from "@/hooks/products/useAddProduct";
 import { StepsType } from "./Stepper";
 import { StepperContext } from "@/contexts/StepperContext";
 import { z } from "zod";
