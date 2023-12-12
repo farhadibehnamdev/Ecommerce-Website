@@ -1,7 +1,7 @@
 "use client";
 import { ApiReturnProduct } from "@/api/productApi";
-import TableUI from "./Table";
-import { useProducts } from "@/hooks/useProducts";
+import { useProducts } from "@/hooks/products/useProducts";
+import BaseTable from "./BaseTable";
 
 interface ProductsProps {
   data: ApiReturnProduct;
@@ -14,7 +14,7 @@ const Products = function () {
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong...</p>;
-  return <TableUI />;
+  return <BaseTable />;
 };
 
 export default Products;
