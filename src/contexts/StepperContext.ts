@@ -1,10 +1,12 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
-export interface StepperContextProps {
-  currentStep: number;
-  completeStep: () => void;
+export interface StepperContextType {
+  activeStep: number;
+}
+const StepperContext = createContext<StepperContextType | {}>({});
+
+export function useSteperContext(): StepperContextType | {} {
+  return useContext(StepperContext);
 }
 
-export const StepperContext = createContext<StepperContextProps | undefined>(
-  undefined
-);
+export default StepperContext;
