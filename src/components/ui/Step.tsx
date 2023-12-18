@@ -6,7 +6,6 @@ const Step = forwardRef((props: any, ref: any) => {
   const {
     active: activeProp,
     children,
-    component = "div",
     completed: completedProp,
     disabled: disabledProp,
     index,
@@ -44,5 +43,5 @@ const Step = forwardRef((props: any, ref: any) => {
     </StepContext.Provider>
   );
 });
-
-export default Step.displayName = "Step";
+Step.displayName = "Step";
+export default Step;

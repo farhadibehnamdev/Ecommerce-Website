@@ -188,7 +188,7 @@ const NavbarUI = function () {
               startContent={<SearchIcon size={18} />}
               type="search"
             />
-            <HeartIcon className="w-6 h-6" />
+            <HeartIcon className="w-6 h-6 hover:cursor-pointer" />
             <NavbarItem className="hidden lg:flex">
               <Dropdown
                 backdrop="blur"
@@ -197,7 +197,7 @@ const NavbarUI = function () {
                 className="text-zinc-800 mt-2"
               >
                 <DropdownTrigger>
-                  <ShoppingBagIcon className="w-6 h-6" />
+                  <ShoppingBagIcon className="w-6 h-6 hover:cursor-pointer" />
                 </DropdownTrigger>
                 <ShoppingCart />
               </Dropdown>
