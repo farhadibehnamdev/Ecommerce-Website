@@ -6,10 +6,10 @@ interface StepperProps {
   children: React.ReactNode[];
 }
 
-const Stepper = forwardRef((props: StepperProps, ref: any) => {
+const Stepper = forwardRef((props: any, ref: any) => {
   const { activeStep = 0, children } = props;
+  const childrenArray = React.Children.toArray(children).filter(Boolean);
 
-  const childrenArray = children.toArray(children).filter(Boolean);
   const steps = childrenArray.map((step: any, index: number) => {
     return cloneElement(step, {
       index,
@@ -24,5 +24,5 @@ const Stepper = forwardRef((props: StepperProps, ref: any) => {
     </StepperContext.Provider>
   );
 });
-
+Stepper.displayName = "Stepper";
 export default Stepper;
