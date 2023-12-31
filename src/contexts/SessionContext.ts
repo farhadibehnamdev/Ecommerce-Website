@@ -3,15 +3,19 @@ import { User } from "@/api/userApi";
 import { createContext } from "react";
 export interface ISessionContext {
   user: User | undefined;
-  isLoading: boolean;
+  isPending: boolean;
   refetch: Function;
   isFetching: boolean;
+  status: string;
+  isSuccess: boolean;
 }
 const defaultSessionContext: ISessionContext = {
   user: undefined,
-  isLoading: false,
+  isPending: false,
   refetch: Function,
   isFetching: false,
+  isSuccess: false,
+  status: "",
 };
 const SessionContext = createContext<ISessionContext>(defaultSessionContext);
 
