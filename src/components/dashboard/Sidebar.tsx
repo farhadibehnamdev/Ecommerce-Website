@@ -1,28 +1,28 @@
 "use client";
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-
 import Image from "next/image";
-import {
-  PiBrandyDuotone,
-  PiChatCenteredTextDuotone,
-  PiFolderDuotone,
-  PiHeartDuotone,
-  PiHouseDuotone,
-  PiPaletteDuotone,
-  PiPercentDuotone,
-  PiShoppingBagOpenDuotone,
-  PiTShirtDuotone,
-  PiTextAaDuotone,
-  PiUsersDuotone,
-} from "react-icons/pi";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { IconType } from "react-icons/lib";
+import {
+  LucideIcon,
+  Wine,
+  TagsIcon,
+  Palette,
+  PencilRuler,
+  Users,
+  MessageSquareCode,
+  LayoutDashboard,
+  ShoppingBag,
+  BookHeart,
+  FolderTree,
+  BadgePercent,
+  PackageSearch,
+  DoorOpen,
+} from "lucide-react";
 type NavigationMenu = {
   name: string;
   href: string;
-  icon: IconType;
+  icon: LucideIcon;
   current: boolean;
 };
 
@@ -30,53 +30,54 @@ const navigation: NavigationMenu[] = [
   {
     name: "Dashboard",
     href: "/dashboard",
-    icon: PiHouseDuotone,
+    icon: LayoutDashboard,
     current: true,
   },
   {
     name: "Products",
     href: "/dashboard/products",
-    icon: PiTShirtDuotone,
+    icon: PackageSearch,
     current: false,
   },
   {
     name: "Categories",
     href: "/dashboard/categories",
-    icon: PiFolderDuotone,
+    icon: FolderTree,
     current: false,
   },
-  { name: "Brands", href: "/brands", icon: PiBrandyDuotone, current: false },
-  { name: "Colors", href: "/colors", icon: PiPaletteDuotone, current: false },
-  { name: "Size", href: "/size", icon: PiTextAaDuotone, current: false },
+  { name: "Tags", href: "/tags", icon: TagsIcon, current: false },
+  { name: "Brands", href: "/brands", icon: Wine, current: false },
+  { name: "Colors", href: "/colors", icon: Palette, current: false },
+  { name: "Size", href: "/size", icon: PencilRuler, current: false },
   {
     name: "Customers",
     href: "/dashboard/customers",
     current: false,
-    icon: PiUsersDuotone,
+    icon: Users,
   },
   {
     name: "Reviews",
     href: "/dashboard/reviews",
     current: false,
-    icon: PiChatCenteredTextDuotone,
+    icon: MessageSquareCode,
   },
   {
     name: "Orders",
     href: "/dashboard/orders",
     current: false,
-    icon: PiShoppingBagOpenDuotone,
+    icon: ShoppingBag,
   },
   {
     name: "Favorites",
     href: "/dashboard/favorites",
     current: false,
-    icon: PiHeartDuotone,
+    icon: BookHeart,
   },
   {
     name: "Discounts",
     href: "/dashboard/discounts",
     current: false,
-    icon: PiPercentDuotone,
+    icon: BadgePercent,
   },
 ];
 function classNames(...classes: any) {
@@ -140,7 +141,7 @@ export default function Sidebar() {
                       onClick={() => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
-                      <XMarkIcon
+                      <DoorOpen
                         className="h-6 w-6 text-white"
                         aria-hidden="true"
                       />
