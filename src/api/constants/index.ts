@@ -5,4 +5,5 @@ export const URLS = {
   getProducts: "products",
   addProducts: "products",
   addCategory: "categories",
+  addTag: "tags",
 };
