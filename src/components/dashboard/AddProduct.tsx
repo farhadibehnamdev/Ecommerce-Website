@@ -5,14 +5,10 @@ import ProductBrand from "./ProductBrand";
 import Pricing from "./Pricing";
 import ProductTag from "./ProductTag";
 import General from "./General";
-import BreadcrumbUI from "./BreadcrumbUI";
-import { UseFormRegisterReturn } from "react-hook-form";
 import { Button } from "@nextui-org/react";
 import ProductFeature from "./ProductFeature";
 import { useForm } from "react-hook-form";
 import useAddProduct from "@/hooks/products/useAddProduct";
-import { StepsType } from "./Stepper";
-import { StepperContext } from "@/contexts/StepperContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -45,17 +41,10 @@ const AddProductFormSchema = z.object({
   tags: z.string().array().nonempty(),
 });
 export type AddProductFormSchemaType = z.infer<typeof AddProductFormSchema>;
-interface AddProdcutsProps {
-  steps: StepsType[];
-  setStepComplete: Function;
-}
 
-const AddProduct = function ({ steps, setStepComplete }: AddProdcutsProps) {
-  const query = useAddProduct();
-  const context = useContext(StepperContext);
-  if (!context)
-    throw new Error("Stepper must be used within a StepperProvider");
-  const { currentStep } = context;
+const AddProduct = function ({ onComplete }: any) {
+  const { productAddMutation } = useAddProduct();
+
   const {
     register,
     handleSubmit,
@@ -68,16 +57,8 @@ const AddProduct = function ({ steps, setStepComplete }: AddProdcutsProps) {
   const editorRef = useRef();
   const formRef = useRef(null);
   const onSubmit = function (data: any) {
-    console.log("errors :: ", errors);
-    console.log("data :: ", data);
-    // const dataStep = steps.map((step) => {
-    //   return {
-    //     ...step,
-    //     current: step.id === currentStep ? false : true,
-    //     status: step.id === currentStep ? "completed" : "not",
-    //   };
-    // });
-    // setStepComplete(dataStep);
+    productAddMutation.mutate(data);
+    onComplete();
   };
   return (
     <>
