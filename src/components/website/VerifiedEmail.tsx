@@ -4,6 +4,7 @@ import { GiConfirmed } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 import { TbFaceIdError } from "react-icons/tb";
 import Link from "next/link";
+import { CircularProgress } from "@nextui-org/react";
 type VerifiedEmailProps = {
   message: string;
   isFailed: boolean;
@@ -19,18 +20,7 @@ const VerifiedEmail = function ({
       {isLoading ? (
         <div className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
           <div className="text-center ring-1 rounded-10 ring-dark p-10">
-            <ContentLoader
-              speed={1}
-              width={476}
-              height={124}
-              viewBox="0 0 476 124"
-              backgroundColor="#f3f3f3"
-              foregroundColor="#ecebeb"
-            >
-              <rect x="28" y="68" rx="3" ry="3" width="410" height="6" />
-              <circle cx="225" cy="26" r="20" />
-              <rect x="153" y="95" rx="0" ry="0" width="162" height="70" />
-            </ContentLoader>
+            <CircularProgress aria-label="Loading..." />
           </div>
         </div>
       ) : (
