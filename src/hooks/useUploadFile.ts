@@ -49,10 +49,10 @@ export const useUploadFile = <T = unknown>(
         return state;
     }
   };
-  const formData = new FormData();
 
   const [state, dispatch] = useReducer(fetchReducer, initialState);
   useEffect(() => {
+    const formData = new FormData();
     if (!url || disabled) return;
     cancelRequest.current = false;
     const fetchData = async () => {
@@ -74,7 +74,7 @@ export const useUploadFile = <T = unknown>(
     return () => {
       cancelRequest.current = true;
     };
-  }, [url]);
+  }, [url, disabled, file]);
 
   return state;
 };

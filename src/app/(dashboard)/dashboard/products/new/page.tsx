@@ -1,5 +1,5 @@
 import BreadcrumbUI from "@/components/dashboard/BreadcrumbUI";
-import StepperUI from "@/components/dashboard/Stepper";
+import StepperUI from "@/components/ui/StepperUI";
 
 const AddProductPage = function () {
   return (

@@ -28,7 +28,7 @@ const VerifiedEmailContainer = function ({ token }: { token: string }) {
       }
     };
     confirmEmail();
-  }, []);
+  }, [token]);
   return (
     <VerifiedEmail
       message={message}

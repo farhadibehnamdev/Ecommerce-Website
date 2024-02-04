@@ -116,19 +116,22 @@ function BaseTable<T>({
     []
   );
 
-  const onSearchChange = React.useCallback((value?: string) => {
-    if (value) {
-      setFilterValue(value);
-      setPage(1);
-    } else {
-      setFilterValue("");
-    }
-  }, []);
+  const onSearchChange = React.useCallback(
+    (value?: string) => {
+      if (value) {
+        setFilterValue(value);
+        setPage(1);
+      } else {
+        setFilterValue("");
+      }
+    },
+    [setFilterValue]
+  );
 
   const onClear = React.useCallback(() => {
     setFilterValue("");
     setPage(1);
-  }, []);
+  }, [setFilterValue]);
 
   const topContent = React.useMemo(() => {
     return (
@@ -173,10 +176,11 @@ function BaseTable<T>({
     );
   }, [
     filterValue,
-    visibleColumns,
     onSearchChange,
     onRowsPerPageChange,
     data.length,
+    onClear,
+    dataType,
   ]);
 
   const bottomContent = React.useMemo(() => {
@@ -216,7 +220,7 @@ function BaseTable<T>({
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages]);
+  }, [selectedKeys, data.length, page, pages, onNextPage, onPreviousPage]);
 
   return (
     <Table
