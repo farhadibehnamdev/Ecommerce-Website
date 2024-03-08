@@ -2,19 +2,57 @@ name: CI
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Nodejs
-        uses: actions/setup-node@v1
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache node_modules
+        uses: actions/cache@v3
         with:
-          node-version: "20.x"
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test:coverage
+          path: ~/.npm
+          key: ${{runner.os}}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{runner.os}}-node-
+      - name: Install dependencies
+        run: npm ci
+      - name: Run lint
+        run: npm run lint
+      - name: Run test
+        run: npm run test
+      - name: Run coverage
+        run: npm run coverage
         env:
           CI: true
+      - name: Upload tests coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage
+          path: coverage
+      - name: Build project
+        if: github.event_name == 'push'
+        run: npm run build
+      - name: Upload build folder
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build
+      - name: ZIP Assets
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          zip -r build.zip ./build
+          zip -r coverage.zip ./coverage
+      - name: Create a release
+        if: github.event_name == 'push' && github == 'refs/heads/main'
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+      - name: Upload coverage reports
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: npx code-coverage
