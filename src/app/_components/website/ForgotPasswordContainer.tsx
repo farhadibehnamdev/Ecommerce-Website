@@ -1,6 +1,6 @@
 "use client";
 import api from "@/api/api";
-import ForgotPassword from "../ForgotPassword";
+import ForgotPassword from "./ForgotPassword";
 import { useRouter } from "next/navigation";
 import useNotification from "@/hooks/useNotification";
 import { useState } from "react";

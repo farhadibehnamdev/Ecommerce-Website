@@ -6,7 +6,7 @@ import {
   ForwardedRef,
 } from "react";
 import { cn, validateFileType } from "@/utils";
-import { MAX_FILE_SIZE } from "@/config/image";
+import { MAX_FILE_SIZE } from "@/configs/image";
 import { PiPlusBold } from "react-icons/pi";
 import ImageUpload from "./ImageUpload";
 import toast from "react-hot-toast";

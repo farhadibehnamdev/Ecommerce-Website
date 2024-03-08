@@ -1,6 +1,6 @@
 "use client";
 import api from "@/api/api";
-import VerifiedEmail from "@/components/website/VerifiedEmail";
+import VerifiedEmail from "@/app/_components/website/VerifiedEmail";
 import { useEffect, useState } from "react";
 
 const VerifiedEmailContainer = function ({ token }: { token: string }) {
