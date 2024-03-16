@@ -1,4 +1,4 @@
-import EmailVerifiedContainer from "@/components/website/containers/VerifiedEmailContainer";
+import EmailVerifiedContainer from "@/app/(auth)/auth/verify-email/_components/VerifiedEmailContainer";
 
 const EmailVerifiedPage = function ({ searchParams }: unknown) {
   const { token } = searchParams;

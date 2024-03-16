@@ -10,7 +10,7 @@ import {
 import { cn, validateFileType } from "@/utils";
 import { MAX_FILE_SIZE } from "@/configs/image";
 import { PiPlusBold } from "react-icons/pi";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "../imageUpload/ImageUpload";
 import toast from "react-hot-toast";
 import {
   CardBody,
@@ -47,10 +47,6 @@ export type State = FileWithUrl[] | [];
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {}
 
-// type FileInputUIProps = {
-//   steps: StepsType[];
-//   setStepComplete: Function;
-// };
 const FileInputUI = forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
     return (

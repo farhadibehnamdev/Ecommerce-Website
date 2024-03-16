@@ -8,7 +8,7 @@ import {
 import { cn, validateFileType } from "@/utils";
 import { MAX_FILE_SIZE } from "@/configs/image";
 import { PiPlusBold } from "react-icons/pi";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "../imageUpload/ImageUpload";
 import toast from "react-hot-toast";
 import { StepsType } from "./Stepper";
 import { CardBody, Card, CardHeader, Chip, Image } from "@nextui-org/react";
@@ -16,7 +16,7 @@ import { State } from "./FileInputUI";
 import useMainImage from "@/hooks/useMainImage";
 import { SidebarCloseIcon, XCircleIcon } from "lucide-react";
 import { URL } from "url";
-import ImageMainUpload from "./ImageMainUpload";
+import ImageMainUpload from "../imageUpload/ImageMainUpload";
 
 interface IProductMainImage {
   ref: ForwardedRef<HTMLInputElement>;

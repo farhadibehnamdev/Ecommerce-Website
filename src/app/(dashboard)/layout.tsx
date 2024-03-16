@@ -1,9 +1,9 @@
 import "@/styles/globals.css";
-import Sidebar from "@/components/dashboard/Sidebar";
-import TanstakProvider from "@/providers/TanstackProvider";
-import SessionProvider from "@/providers/SessionProvider";
-import NextUIProviderWrapper from "@/providers/NextUIProviderWrapper";
-import Navbar from "@/components/dashboard/Navbar";
+import TanstakProvider from "@/providers/react-query-provider";
+import SessionProvider from "@/providers/session-provider";
+import NextUIProviderWrapper from "@/providers/nextui-provider-wrapper";
+import Sidebar from "@/app/_components/sidebar/sidebar";
+import Navbar from "@/app/_components/navbar/navbar";
 
 interface IDashboardLayout {
   children: React.ReactNode;

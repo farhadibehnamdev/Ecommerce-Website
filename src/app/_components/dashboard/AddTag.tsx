@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import BreadcrumbUI from "./BreadcrumbUI";
+import BreadcrumbUI from "../breadcrumbs/BreadcrumbUI";
 
 type AddTagType = {
   code: string;

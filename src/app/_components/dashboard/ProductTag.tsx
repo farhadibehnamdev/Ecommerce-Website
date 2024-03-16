@@ -8,9 +8,9 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import { IAddProductFormType } from "@/types/AddProductType";
+import { IAddProduct } from "@/types/add-product.types";
 import { useState } from "react";
-import { AddProductFormSchemaType } from "./AddProduct";
+import { AddProductFormSchemaType } from "../../(dashboard)/dashboard/products/new/_components/add-product";
 import { UseFormSetValue } from "react-hook-form";
 
 type Person = {
@@ -44,7 +44,7 @@ const people: Person[] = [
   },
 ];
 
-interface IProductTag extends IAddProductFormType {
+interface IProductTag extends IAddProduct {
   setValue: UseFormSetValue<AddProductFormSchemaType>;
 }
 

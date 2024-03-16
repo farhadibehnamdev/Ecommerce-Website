@@ -10,8 +10,8 @@ import {
   Spacer,
 } from "@nextui-org/react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { AddProductFormSchemaType } from "./AddProduct";
-import TextEditor from "./TextEditor";
+import { AddProductFormSchemaType } from "../../(dashboard)/dashboard/products/new/_components/add-product";
+import TextEditor from "../text-editor/text-editor";
 
 interface IGeneral {
   register: UseFormRegister<AddProductFormSchemaType>;

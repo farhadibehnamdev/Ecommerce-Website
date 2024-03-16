@@ -10,7 +10,7 @@ import {
 import { cn, validateFileType } from "@/utils";
 import { MAX_FILE_SIZE } from "@/configs/image";
 import { PiPlusBold } from "react-icons/pi";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "../imageUpload/ImageUpload";
 import toast from "react-hot-toast";
 import { StepsType } from "./Stepper";
 import { CardBody, Card, CardHeader, Chip } from "@nextui-org/react";

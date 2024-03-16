@@ -1,4 +1,4 @@
-import ResetPasswordContainer from "@/components/website/containers/ResetPasswordContainer";
+import ResetPasswordContainer from "@/app/(auth)/auth/reset-password/_components/ResetPasswordContainer";
 
 const ResetPasswordPage = function ({ searchParams }: unknown) {
   const { token } = searchParams;
