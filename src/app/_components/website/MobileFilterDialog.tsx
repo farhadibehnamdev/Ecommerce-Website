@@ -1,6 +1,6 @@
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
-import ProductCategories from "./ProductCategories";
+import ProductCategories from "../../(site)/products/_components/product-categories";
 import { Fragment, useState } from "react";
 
 const filters = [
