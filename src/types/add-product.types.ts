@@ -1,8 +1,7 @@
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { AddProductFormSchemaType } from "@/components/dashboard/AddProduct";
+import { AddProductFormSchemaType } from "@/app/(dashboard)/dashboard/products/new/_components/add-product";
 
-export interface IAddProductFormType {
+export interface IAddProduct {
   register: UseFormRegister<AddProductFormSchemaType>;
   errors: FieldErrors<AddProductFormSchemaType>;
 }
-
