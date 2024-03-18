@@ -3,8 +3,8 @@ import { Footer } from "@/app/_components/footer/footer";
 import WebsiteFeatures from "@/app/_components/feature/feature";
 import SessionProvider from "@/providers/session-provider";
 import QueryProvider from "@/providers/react-query-provider";
-import Header from "@/app/_components/header/header";
 import { Inter } from "next/font/google";
+import { Header } from "./_components/header";
 
 export const metadata = {
   title: "Ecommerce Website",
