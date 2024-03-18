@@ -2,9 +2,9 @@
 import Image from "next/image";
 import { ArrowRight } from "react-huge-icons/outline";
 
-const Hero = function () {
+export const Hero = function () {
   return (
-    <div className="relative bg-dark5  md:h-full  lg:w-full md:w-full sm:w-full">
+    <div className="relative  bg-dark5  md:h-full  lg:w-full md:w-full sm:w-full">
       <div className="grid lg:grid-cols-12 lg:gap-x-8 lg:px-8 md:grid-cols-2  md:px-10">
         <div className="ml-0 pb-24 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-56 lg:pt-48 xl:col-span-6 sm:mx-auto lg:mx-auto w-fit xs:mx-auto ">
           <div className="relative  max-w-2xl lg:mx-0">
@@ -49,5 +49,3 @@ const Hero = function () {
     </div>
   );
 };
-
-export default Hero;
