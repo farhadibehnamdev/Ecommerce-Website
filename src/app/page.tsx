@@ -6,7 +6,7 @@ import Testimonial from "@/app/_components/testimonial/testimonial";
 
 export default function Home() {
   return (
-    <main className="flex  flex-col items-center justify-between lg:overflow-hidden md:overflow-hidden sm:overflow-hidden xs:overflow-hidden bg-white  ">
+    <main className=" bg-white  ">
       <Hero />
       <ShopByCategories />
       <OurBestseller />
