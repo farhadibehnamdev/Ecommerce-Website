@@ -8,7 +8,7 @@ export const Footer = function () {
       className="bg-black text-white flex justify-center"
       aria-labelledby="footer-heading"
     >
-      <div className="xl:mx-32 2xl:mx-32 md:p-10 xl:px-10 2xl:px-0 lg:p-10 sm:p-10 xs:p-10 lg:mx-auto pb-5 sm:pt-24 2xl:w-[1140px] xl:w-[1140px]">
+      <div className="xl:mx-32 2xl:mx-32 md:p-10 xl:px-10 2xl:px-0 lg:p-10 sm:p-10 xs:p-10 lg:mx-auto pb-5 sm:pt-24 xl:max-w-7xl">
         <div className="lg:grid lg:grid-cols-1  md:grid md:grid-cols-1  xl:grid-cols-2 xl:gap-8">
           <div className="grid grid-cols-2 pb-12 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
