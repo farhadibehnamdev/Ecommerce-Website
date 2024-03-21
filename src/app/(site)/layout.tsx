@@ -4,9 +4,10 @@ import WebsiteFeatures from "@/app/_components/feature/feature";
 import SessionProvider from "@/providers/session-provider";
 import QueryProvider from "@/providers/react-query-provider";
 import { Inter } from "next/font/google";
-import { Header } from "./_components/header";
+import { Header } from "../_components/header";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Ecommerce Website",
   description: "This is the Ecommerce Website",
 };
