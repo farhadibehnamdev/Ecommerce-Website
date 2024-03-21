@@ -1,4 +1,4 @@
-import { ALLOWED_FILE_TYPES } from "@/config/image";
+import { ALLOWED_FILE_TYPES } from "@/configs/image";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 

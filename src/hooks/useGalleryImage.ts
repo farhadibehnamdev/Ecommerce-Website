@@ -28,7 +28,6 @@ const useGalleryImage = function () {
     },
     []
   );
-  console.log("gallery Image ::: ", galleryImageInput);
   const handleDrag = (e: DragEvent<HTMLFormElement | HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();

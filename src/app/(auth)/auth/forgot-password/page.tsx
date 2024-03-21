@@ -1,4 +1,4 @@
-import ForgotPasswordContainer from "@/components/website/containers/ForgotPasswordContainer";
+import ForgotPasswordContainer from "@/app/(auth)/auth/forgot-password/_components/ForgotPasswordContainer";
 
 const ForgotPasswordPage = function () {
   return <ForgotPasswordContainer />;
